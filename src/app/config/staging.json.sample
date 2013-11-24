@@ -1,0 +1,13 @@
+{
+    "debug" : false,
+    "db.options": {
+        "driver" : "pdo_mysql",
+        "charset" : "utf8",
+        "host" : "localhost",
+        "dbname" : "DATABASE NAME",
+        "user" : "USERNAME",
+        "password" : "PASSWORD"
+    },
+    "MovieInfoURL" : "DATA URL",
+    "ShowtimesURL" : "DATA URL"
+}

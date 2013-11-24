@@ -1,0 +1,176 @@
+{% set cinemanames = {'lu1': 'Utopolis Kirchberg', 'lu2': 'Ciné Utopia', 'lu23': 'Utopolis Belval'} %}
+{% spaceless %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Mona Kino</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Description goes here ;)">
+        <meta name="keywords" content="cinema, utopolis, utopia, cine, movies">
+        <meta name="author" content="@Kaweechelchen">
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!-- Le fav and touch icons -->
+        <link rel="shortcut icon" href="/static/images/favicon2.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/images/logo-114.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/images/logo-72.png">
+        <link rel="apple-touch-icon-precomposed" href="/static/images/logo-57.png">
+        <!--<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places" type="text/javascript"></script>-->
+
+        <script src="/js/jquery-1.10.2.min.js" type="text/javascript" ></script>
+        <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen, projection" />
+
+    </head>
+    <body>
+        <a class="sr-only" href="#content">Skip navigation</a>
+        <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+            <div class="navbar-header">
+                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">KINO.MONA.LU<sup class="beta">BETA</sup></a>
+            </div>
+            <nav class="navbar-collapse bs-navbar-collapse collapse" role="navigation" style="height: 1px;">
+                <ul class="nav navbar-nav">
+                    {#<li><a href="/">Movies</a></li>
+                    <li><a href="/about">About</a></li>#}
+                </ul>
+            </nav>
+        </header>
+        <div class="navbar navbar-secondary" role="subnav">
+            <nav class="navbar-collapse" role="sub-navigation" style="height: 1px;">
+                <ul class="actions">
+                    <li><a href="#" class="btn btn-primary active">All</a></li>
+                    <li><a class="btn btn-primary ">Utopolis Kirchberg</a></li>
+                    <li><a class="btn btn-primary ">Utopolis Belval</a></li>
+                    <li><a class="btn btn-primary ">Cine Utopia</a></li>
+                </ul>
+                <ul class="actions sub">
+                </ul>
+            </nav>
+        </div>
+        <div id="content" class="" role="main">
+            <div id="list-event">
+                <div class="list-section">
+                {% for date, screening in screenings %}
+
+                    {% for idmovie, cinemas in screening %}
+
+                        {% set movie = attribute(movies, idmovie) %}
+
+                            {% if loop.first %}
+
+                                <div class="section-header">
+                                    <h2 class="vertical-center">
+                                        {% if "now"|date("Y-m-d") in date %}
+                                            <span class="time-format" data-dateformat="HH:mm" data-date="{{ date }}"></span>&nbsp;<span class="timeleft" data-date="{{ date }}"></span>
+                                        {% else %}
+                                            <span class="time-format" data-dateformat="ddd - HH:mm" data-date="{{ date }}"></span>
+                                        {% endif %}
+                                    </h2>
+                                </div>
+
+                            {% endif %}
+
+                            <div class="section-content">
+
+                            <section class="event-in-list">
+                                <div class="event-details">
+                                    <div class="event-name">
+                                        <div class="time title large">
+
+                                        {{ movie.title }}
+
+                                        </div>
+                                        <div class="endtime">ends at &#126;<span class="endtime-format" data-dateformat="HH:mm" data-runtime="{{ movie.runtime + 15 }}" data-date="{{ date }}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="event-info">
+                                    <div class="synopsis">
+
+                                    {{ movie.synopsis }}
+
+                                    </div>
+                                    <ul class="tags actor">
+                                        {% set actors = movie.actor|split(', ') %}
+                                        {% for actor in actors %}
+                                            {% if actor != '' %}
+                                                <li>
+                                                    {{ actor }}
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+
+
+                                    <ul class="tags cinema">
+
+                                        {% for cinema in cinemas %}
+
+                                                <li>
+                                                    {{ attribute( cinemanames,cinema ) }}
+                                                </li>
+
+                                        {% endfor %}
+
+                                    </ul>
+                                    <ul class="tags language">
+                                        <li>
+                                            {{ movie.language }}
+                                        </li>
+                                    </ul>
+                                    {% if movie.age is defined %}
+                                        <ul class="tags age">
+                                            <li>
+                                                {{ movie.age }}
+                                            </li>
+                                        </ul>
+                                    {% endif %}
+
+                                    {% if movie.extra3D %}
+                                        <ul class="tags extra">
+                                            <li>
+                                                3D
+                                            </li>
+                                        </ul>
+                                    {% endif %}
+                                </div>
+                            </section>
+                        {% endfor %}
+                    {% endfor %}
+                    </div>
+                </div>
+
+   </div>
+</div>
+
+   </div>
+
+      </div>
+
+    <script src="/js/bootstrap.min.js" type="text/javascript" ></script>
+    <script src="/js/moment.min.js" type="text/javascript" ></script>
+    <script src="/js/bundle-bundle_application_defer.js" type="text/javascript" ></script>
+
+    <script>
+
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-30971852-5', 'mona.lu');
+        ga('send', 'pageview');
+
+    </script>
+
+   </body>
+</html>
+{% endspaceless %}
