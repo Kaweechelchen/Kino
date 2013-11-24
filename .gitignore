@@ -1,3 +1,5 @@
 .DS_Store
 src/vendor
 src/web/.htaccess
+src/app/config/development.json
+src/app/config/staging.json
