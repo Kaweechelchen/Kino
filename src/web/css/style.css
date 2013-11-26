@@ -106,6 +106,7 @@ h2.vertical-center {
 }
 
 .tags.language li {
+    text-transform: uppercase;
     float: left;
     background-color:#737b8f
 }
