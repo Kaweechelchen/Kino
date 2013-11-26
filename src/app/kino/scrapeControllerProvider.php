@@ -9,15 +9,11 @@
 
         static public function xmlByUrlToArray ( $url ) {
 
-            $fileContents= file_get_contents( $url );
+            $urlencoded = urlencode( $url );
 
-            $fileContents = str_replace(array("\n", "\r", "\t"), '', $fileContents);
+            $json = file_get_contents( 'http://xml2json.herokuapp.com/?url=' . $urlencoded );
 
-            $fileContents = trim(str_replace('"', "'", $fileContents));
-
-            $simpleXml = simplexml_load_string($fileContents);
-
-            $json   = json_encode($simpleXml);
+            $json = substr($json, 1, -1);
 
             return json_decode($json, true);
 
@@ -33,7 +29,7 @@
                 $movieInfo  =   self::xmlByUrlToArray( $app['MovieInfoURL'] );
 
                 // All the data is in $movieInfo['movie']
-                $movies     =   $movieInfo['movie'];
+                $movies     =   $movieInfo['movies']['movie'];
 
                 //  Loop through each movie and save its data to the database
                 foreach ($movies as $key => $movie) {
@@ -155,8 +151,8 @@
                 //  Parse the showtimes XML data
                 $showTimes  =   self::xmlByUrlToArray( $app['ShowtimesURL'] );
 
-                //  All the data is in $movieInfo['movie']
-                $schedules     =   $showTimes['schedule'];
+                //  All the data is in $showTimes['schedules']['schedule']
+                $schedules     =   $showTimes['showtimes']['schedule'];
 
                 foreach ( $schedules as $cinema ) {
 
