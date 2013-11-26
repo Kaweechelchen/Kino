@@ -150,6 +150,7 @@ div.synopsis {
 }
 
 .list-section .section-header {
+    z-index: 10;
     padding: 0 15px;
 }
 
@@ -161,4 +162,13 @@ div.synopsis {
 
 .time-format {
     font-weight: 900;
+}
+
+.sticky-header.fixed {
+    position: fixed;
+    top: 51px;
+    width: 100%;
+}
+.sticky-header.fixed.absolute {
+    position: absolute;
 }

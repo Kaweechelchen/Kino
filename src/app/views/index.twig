@@ -66,7 +66,7 @@
 
                             {% if loop.first %}
 
-                                <div class="section-header">
+                                <div class="section-header sticky-header">
                                     <h2 class="vertical-center">
                                         {% if "now"|date("Y-m-d") in date %}
                                             <span class="time-format" data-dateformat="HH:mm" data-date="{{ date }}"></span>&nbsp;<span class="timeleft" data-date="{{ date }}"></span>
@@ -143,6 +143,7 @@
                                     {% endif %}
                                 </div>
                             </section>
+                            </div>
                         {% endfor %}
                     {% endfor %}
                     </div>
