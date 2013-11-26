@@ -126,7 +126,7 @@
                                             {{ movie.language }}
                                         </li>
                                     </ul>
-                                    {% if movie.age is defined %}
+                                    {% if ( movie.age is defined ) and ( movie.age != 'EA' ) %}
                                         <ul class="tags age">
                                             <li>
                                                 {{ movie.age }}
