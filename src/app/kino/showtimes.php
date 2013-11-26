@@ -10,7 +10,7 @@
                 *
                 FROM showtimes
                 WHERE datetime >= CURRENT_TIMESTAMP()
-                AND datetime < CURDATE() + INTERVAL 7 DAY
+                AND datetime < CURDATE() + INTERVAL 2 DAY
                 ORDER BY datetime';
 
             $showtimes = $app['db']->fetchAll(
