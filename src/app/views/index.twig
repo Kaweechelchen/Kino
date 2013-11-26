@@ -95,7 +95,8 @@
                                 <div class="event-info">
                                     <div class="synopsis">
 
-                                    {{ movie.synopsis }}
+                                    {% set maxLength = 300 %}
+                                    {{ movie.synopsis|length > maxLength ? movie.synopsis|slice(0, maxLength) ~ '...' : movie.synopsis  }}
 
                                     </div>
                                     <ul class="tags actor">
