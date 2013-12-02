@@ -11,8 +11,10 @@
 
             $urlencoded = urlencode( $url );
 
+            // Getting the data from an anonymizer ;)
             $json = file_get_contents( 'http://xml2json.herokuapp.com/?url=' . $urlencoded );
 
+            //Removing the beginning and ending brackets
             $json = substr($json, 1, -1);
 
             return json_decode($json, true);
