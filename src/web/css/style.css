@@ -93,7 +93,9 @@ h2.vertical-center {
 }
 
 .tags.actor li {
+    padding: .4em .7em;
     color: #333333;
+    font-size: 70%;
 	background-color:#f8af00;
 }
 
@@ -126,7 +128,7 @@ div.synopsis {
 }
 
 .event-details {
-    width: 25%;
+    width: 30%;
 }
 
 .event-time {
@@ -138,11 +140,11 @@ div.synopsis {
 .event-name {
     padding: 10px 15px;
     float: left;
-    width: 100%;
+    width: 75%;
 }
 
 .event-in-list .event-info {
-    width: 75%;
+    width: 70%;
 }
 
 .small {
@@ -168,7 +170,22 @@ div.synopsis {
     position: fixed;
     top: 51px;
     width: 100%;
+    -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
 }
 .sticky-header.fixed.absolute {
     position: absolute;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.movie-image {
+    width: 25%;
+    float: left;
+}
+
+.movie-image img{
+    width: 100%;
 }
