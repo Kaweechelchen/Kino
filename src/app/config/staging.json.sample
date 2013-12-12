@@ -9,5 +9,6 @@
         "password" : "PASSWORD"
     },
     "MovieInfoURL" : "DATA URL",
-    "ShowtimesURL" : "DATA URL"
+    "ShowtimesURL" : "DATA URL",
+    "RT_api_key" : "API_KEY"
 }
