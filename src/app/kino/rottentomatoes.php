@@ -4,7 +4,7 @@
 
     use Silex\Application;
 
-	class rottentomatoes {
+	class Rottentomatoes {
 
         static public function getMovieData ( $movieName ) {
 
@@ -36,18 +36,17 @@
 
                 $actors[$key] = array (
                     'name'  =>  $actor['name'],
-                    'idRT'  =>  $actor['id']
+                    'id'    =>  $actor['id']
                 );
 
             }
 
             $movie = array (
-                'api'               =>  'RT',
-                'name'              =>  $movieData['title'],
-                'age'               =>  $movieData['mpaa_rating'],
+                'title'             =>  $movieData['title'],
+                'mpaa_rating'       =>  $movieData['mpaa_rating'],
                 'runtime'           =>  $movieData['runtime'],
-                'ratingRTCritics'   =>  $movieData['ratings']['critics_score'],
-                'ratingRTAudience'  =>  $movieData['ratings']['audience_score'],
+                'RTcritics_score'   =>  $movieData['ratings']['critics_score'],
+                'RTaudience_score'  =>  $movieData['ratings']['audience_score'],
                 'synopsis'          =>  $movieData['synopsis'],
                 'posterSmall'       =>  $movieData['posters']['detailed'],
                 'posterLarge'       =>  $movieData['posters']['original'],
@@ -56,7 +55,7 @@
                 'actors'            =>  $actors
             );
 
-            print_r( $movie );
+            return $movie;
 
         }
 
