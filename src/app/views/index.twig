@@ -82,6 +82,9 @@
 
                             <section class="event-in-list">
                                 <div class="event-details">
+                                    <div class="movie-image">
+                                        <img src="http:\/\/ia.media-imdb.com\/images\/M\/MV5BMTAyMjQ3OTAxMzNeQTJeQWpwZ15BbWU4MDU0NzA1MzAx._V1_SX300.jpg" />
+                                    </div>
                                     <div class="event-name">
                                         <div class="time title large">
 
@@ -115,9 +118,9 @@
 
                                         {% for cinema in cinemas %}
 
-                                                <li>
-                                                    {{ attribute( cinemanames,cinema ) }}
-                                                </li>
+                                            <li>
+                                                {{ attribute( cinemanames,cinema ) }}
+                                            </li>
 
                                         {% endfor %}
 
@@ -131,6 +134,14 @@
                                         <ul class="tags age">
                                             <li>
                                                 {{ movie.age }}
+                                            </li>
+                                        </ul>
+                                    {% endif %}
+
+                                    {% if ( movie.genre is defined ) and ( movie.genre != '' ) %}
+                                        <ul class="tags age">
+                                            <li>
+                                                {{ movie.genre }}
                                             </li>
                                         </ul>
                                     {% endif %}
