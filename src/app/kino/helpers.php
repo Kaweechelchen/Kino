@@ -48,27 +48,29 @@
 
                 $movieId = $RTmovieData['idRT'];
 
-                foreach ($RTmovieData['actors'] as $actor) {
-
-                    self::saveActorMovieRelation ( $app, $actor, $movieId );
-
-                }
+                self::saveActorsMovieRelation ( $app, $RTmovieData['actors'], $movieId );
 
             }
 
+            return $movieId;
+
         }
 
-        static public function saveActorMovieRelation ( $app, $actor, $movieId ) {
+        static public function saveActorsMovieRelation ( $app, $actors, $movieId ) {
 
-            self::saveActor( $app, $actor );
+            foreach ( $actors as $actor ) {
 
-            $app['db']->insert(
-                'movieActor',
-                array(
-                    'fimovie'   =>  $movieId,
-                    'fiactor'   =>  $actor['id']
-                )
-            );
+                self::saveActor( $app, $actor );
+
+                $app['db']->insert(
+                    'movieActor',
+                    array(
+                        'fimovie'   =>  $movieId,
+                        'fiactor'   =>  $actor['id']
+                    )
+                );
+
+            }
 
         }
 
@@ -113,6 +115,65 @@
             );
 
             return $movieId;
+
+        }
+
+        static public function deleteScreenings ( $app ) {
+
+            $count = $app['db']->executeUpdate(
+                'DELETE FROM screenings'
+            );
+
+            $count += $app['db']->executeUpdate(
+                'DELETE FROM showtimes'
+            );
+
+            return $count;
+
+        }
+
+        static public function saveScreening ( $app, $movieId, $cinemaId, $showtime ) {
+
+            $showtimeId = self::getShowtimeId ( $app, $showtime );
+
+            $app['db']->insert(
+                'screenings',
+                array(
+                    'fimovie'       =>  $movieId,
+                    'fishowtime'    =>  $showtimeId,
+                    'ficinema'      =>  $cinemaId
+                )
+            );
+
+        }
+
+        static public function getShowtimeId ( $app, $showtime ) {
+
+            $showtimeId_query  = 'SELECT idshowtime
+                FROM showtimes
+                WHERE datetime = ?';
+
+            $showtimeId = $app['db']->fetchColumn(
+                $showtimeId_query,
+                array(
+                    $showtime
+                )
+            );
+
+            if ( !$showtimeId ) {
+
+                $app['db']->insert(
+                    'showtimes',
+                    array(
+                        'datetime'      =>  $showtime
+                    )
+                );
+
+                $showtimeId = $app['db']->lastInsertId();
+
+            }
+
+            return $showtimeId;
 
         }
 
