@@ -16,6 +16,8 @@
 
             $ctr->get( '/', function( Application $app ) {
 
+                helpers::deleteScreenings( $app );
+
                 $cinameData = file_get_contents('index.html');
 
                 $app['moviePatterns'] = array (
