@@ -4,7 +4,7 @@
 
     use Silex\Application;
 
-	class rtl {
+	class RTL {
 
         static public function getShowTimesByCinemaAndDate ( $app, $cinemaId, $date )  {
 
@@ -44,9 +44,7 @@
 
                 }
 
-                rottentomatoes::getMovieData ( $movie['name'] );
-
-                echo $movie['id'] .' >> ' . $movie['name'] . ' >> ' . $movie['language'] . '<br />';
+                $movieId = Helpers::saveMovie ( $app, $movie );
 
                 preg_match_all($screeningTableRowPattern, $movieData, $screeningRows);
 
@@ -68,9 +66,11 @@
 
                         if ( !empty( $screeningTime ) ) {
 
-                            $screeningDate = date( 'd.m.Y', strtotime( $date + $weekDayCount ) );
+                            $screeningDate = date( 'Y-m-d', strtotime( $date + $weekDayCount ) );
 
-                            echo "$screeningDate >> $screeningTime $weekDayCount<br />";
+                            $datetime = $screeningDate . ' ' .$screeningTime;
+
+                            helpers::saveScreening( $app, $movieId, $cinemaId, $datetime );
 
                         }
 
