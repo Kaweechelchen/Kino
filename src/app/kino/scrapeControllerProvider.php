@@ -6,6 +6,7 @@
     use Silex\ControllerProviderInterface;
     use kino\rottentomatoes;
     use kino\rtl;
+    use kino\helpers;
 
     class scrapeControllerProvider implements ControllerProviderInterface {
 
@@ -19,7 +20,7 @@
 
                 $app['moviePatterns'] = array (
                     'id'        =>  '/kino\/deprogramm\/film\?id=(.*?)&seance/',
-                    'name'      =>  '/\" class="title">(.*?)<\/a>/',
+                    'title'     =>  '/\" class="title">(.*?)<\/a>/',
                     'language'  =>  '/<\/a>&nbsp;(.*?)<\/div>/'
                 );
 
@@ -57,7 +58,7 @@
 
                     foreach ($crawlDates as $crawlDate) {
 
-                        rtl::getShowTimesByCinemaAndDate ( $app, $cinemaId, $crawlDate );
+                        RTL::getShowTimesByCinemaAndDate ( $app, $cinemaId, $crawlDate );
 
                     }
 
