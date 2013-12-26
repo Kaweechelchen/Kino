@@ -24,26 +24,30 @@
 
                 }
 
-                $RTmovieData = Rottentomatoes::getMovieData ( $movie['title'] );
+                $RTmovieData = Rottentomatoes::getMovieData ( $app, $movie['title'] );
+
+                $movieData = array(
+                    'idmovie'           =>  $RTmovieData['idRT'],
+                    'title'             =>  $RTmovieData['title'],
+                    'runtime'           =>  $RTmovieData['runtime'],
+                    'synopsis'          =>  $RTmovieData['synopsis'],
+                    'mpaa_rating'       =>  $RTmovieData['mpaa_rating'],
+                    'RTcritics_score'   =>  $RTmovieData['RTcritics_score'],
+                    'RTaudience_score'  =>  $RTmovieData['RTaudience_score'],
+                    'posterSmall'       =>  $RTmovieData['posterSmall'],
+                    'posterLarge'       =>  $RTmovieData['posterLarge'],
+                    'idRTL'             =>  $movie['id'],
+                    'language'          =>  $movieLanguage,
+                    '3d'                =>  $movie3D
+                );
+
+                if ( isset ( $RTmovieData['idIMDB'] ) ) {
+                    $movieData['idIMDB']    =  $RTmovieData['idIMDB'];
+                }
 
                 $app['db']->insert(
                     'movies',
-                    array(
-                        //'idmovie'           =>  $RTmovieData['idRT'],
-                        'idmovie'           =>  $movie['title'],
-                        'title'             =>  $RTmovieData['title'],
-                        'runtime'           =>  $RTmovieData['runtime'],
-                        'synopsis'          =>  $RTmovieData['synopsis'],
-                        'mpaa_rating'       =>  $RTmovieData['mpaa_rating'],
-                        'RTcritics_score'   =>  $RTmovieData['RTcritics_score'],
-                        'RTaudience_score'  =>  $RTmovieData['RTaudience_score'],
-                        'posterSmall'       =>  $RTmovieData['posterSmall'],
-                        'posterLarge'       =>  $RTmovieData['posterLarge'],
-                        'idIMDB'            =>  $RTmovieData['idIMDB'],
-                        'idRTL'             =>  $movie['id'],
-                        'language'          =>  $movieLanguage,
-                        '3d'                =>  $movie3D
-                    )
+                    $movieData
                 );
 
                 $movieId = $RTmovieData['idRT'];
@@ -103,18 +107,18 @@
 
         static public function movieIdExists ( $app, $movieId ) {
 
-            $movieId_query  = 'SELECT idRTL
+            $movieIdExists_query  = 'SELECT idRTL
                 FROM movies
                 WHERE idRTL = ?';
 
-            $movieId = $app['db']->fetchColumn(
-                $movieId_query,
+            $movieIdExists = $app['db']->fetchColumn(
+                $movieIdExists_query,
                 array(
                     (int) $movieId
                 )
             );
 
-            return $movieId;
+            return $movieIdExists;
 
         }
 

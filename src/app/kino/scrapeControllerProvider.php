@@ -18,7 +18,11 @@
 
                 helpers::deleteScreenings( $app );
 
-                $cinameData = file_get_contents('index.html');
+                $url = 'http://kultur.rtl.lu/kino/deprogramm/';
+
+                $proxy = 'http://getcontents.herokuapp.com/?url=';
+
+                $cinameData = file_get_contents( $proxy . $url );
 
                 $app['moviePatterns'] = array (
                     'id'        =>  '/kino\/deprogramm\/film\?id=(.*?)&seance/',
