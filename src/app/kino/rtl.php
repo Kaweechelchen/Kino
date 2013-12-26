@@ -16,9 +16,7 @@
 
             $proxy = 'http://getcontents.herokuapp.com/?url=';
 
-            //$screeningData = file_get_contents( $proxy . $url );
-            //
-            $screeningData = file_get_contents( 'salle2_seance20131127.html' );
+            $screeningData = file_get_contents( $proxy . $url );
 
             $moviesPattern = '/\<div class="movie">(.*?)<div class="divider">/s';
 
