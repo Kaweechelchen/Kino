@@ -2,46 +2,64 @@
 
     namespace kino;
 
-    use kino\showtimes;
+    use Silex\Application;
 
-	class Screenings {
+    class Screenings {
 
-        static public function getScreenings( $app ) {
+        static public function getScreenings( Application $app ) {
 
-            $showtimes = Showtimes::getShowtimes( $app );
+            $screenings_query = 'SELECT
+                *
+                FROM screenings
+                ORDER BY datetime';
 
-            foreach ($showtimes as $showtime) {
+            $screenings = $app['db']->fetchAll(
+                $screenings_query
+            );
 
-                $datetime = $showtime['datetime'];
-
-                $screeningsByShowtime_query = 'SELECT
-                    *
-                    FROM screenings
-                    WHERE fishowtime = ?';
-
-                $screeningsByShowtime = $app['db']->fetchAll(
-
-                    $screeningsByShowtime_query,
-                    array(
-                        $showtime['idshowtime']
-                    )
-
-                );
-
-                foreach ($screeningsByShowtime as $screeningByShowtime) {
-
-                    $idmovie = $screeningByShowtime['fimovie'];
-                    $idcinema = $screeningByShowtime['ficinema'];
-
-                    $screenings[$datetime][$idmovie][] = $idcinema;
-
-                }
-
-
+            foreach( $screenings as $screening ){
+                $idxScreenings[$screening['idScreening']] = $screening;
             }
 
-            return $screenings;
+            return $idxScreenings;
 
+        }
+
+        static public function getUpcomingScreenings( Application $app ) {
+
+            $screenings_query = 'SELECT
+                *
+                FROM screenings
+                WHERE datetime >= NOW()
+                ORDER BY datetime';
+
+            $screenings = $app['db']->fetchAll(
+                $screenings_query
+            );
+
+            foreach( $screenings as $screening ){
+                $idxScreenings[$screening['idScreening']] = $screening;
+            }
+
+            return $idxScreenings;
+
+        }
+
+        static public function getScreeningsById( Application $app, $screeningId ) {
+
+            $screening_query = 'SELECT
+                *
+                FROM screenings
+                WHERE idScreening = ?';
+
+            $screening = $app['db']->fetchAll(
+                $screening_query,
+                array(
+                    $screeningId
+                )
+            );
+
+            return $screening;
 
         }
 

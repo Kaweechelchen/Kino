@@ -18,7 +18,7 @@
             );
 
             foreach( $movies as $movie ){
-                $idxMovies[$movie['idmovie']] = $movie;
+                $idxMovies[$movie['idRTL']] = $movie;
             }
 
             return $idxMovies;
@@ -30,7 +30,7 @@
             $movie_query = 'SELECT
                 *
                 FROM movies
-                WHERE idmovie = ?';
+                WHERE idRTL = ?';
 
             $movie = $app['db']->fetchAll(
                 $movie_query,

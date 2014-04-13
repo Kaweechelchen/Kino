@@ -6,6 +6,7 @@
     use Silex\ControllerProviderInterface;
     use kino\movies;
     use kino\screenings;
+    use kino\actors;
 
 
     class cinemaControllerProvider implements ControllerProviderInterface {
@@ -16,14 +17,10 @@
 
             $ctr->get( '/', function( Application $app ) {
 
-                $screenings = Screenings::getScreenings( $app );
-
-                $movies = Movies::getMovies( $app );
-
-                return $app['twig']->render( 'index.twig',
+                return $app['twig']->render( 'new.twig',
                     array(
-                        'movies'        =>  $movies,
-                        'screenings'    =>  $screenings
+                        'movies'        =>  Movies::getMovies( $app ),
+                        'screenings'    =>  Screenings::getUpcomingScreenings( $app )
                     )
                 );
 
