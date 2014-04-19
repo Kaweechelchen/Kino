@@ -6,6 +6,20 @@
 
     class ScrapeHelpers {
 
+
+        /**
+         * Get Content from a URL via a proxy
+         * @param  [string] $url [the URL]
+         * @return [string]      [contents from the URL]
+         */
+        static public function getContent ( $url ) {
+
+            $proxy = 'http://getcontents.herokuapp.com/?url=';
+
+            return file_get_contents( $proxy . $url );
+
+        }
+
         /**
          * Returns the actors as array for the given movie data
          * @param  [string] $movieData [Movie data from defined source]
@@ -210,10 +224,10 @@
 
         /**
          * Return the poster image URI for the given movie data
-         * @param  [string] $movieData [Movie data from defined source]
-         * @return [string]            [Poster URI]
+         * @param  [string ] $movieData [Movie data from defined source]
+         * @return [boolean]            [Bool if it worked]
          */
-        static public function getPosterUrl ( $movieData ) {
+        static public function getPoster ( $movieData, $movieId ) {
 
             preg_match(
                 '/<img src="http:\/\/images.newmedia.lu\/rtl.lu\/kino\/affiches\/(.*?)">/',
@@ -221,7 +235,11 @@
                 $posterURL
             );
 
-            return $posterURL[1];
+            $url = substr( $posterURL[0], 10, -2 );
+            $img = __DIR__ . "/../../web/img/posters/$movieId.jpg";
+            file_put_contents($img, file_get_contents($url));
+
+            return true;
 
         }
 

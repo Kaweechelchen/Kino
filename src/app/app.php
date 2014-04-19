@@ -30,4 +30,6 @@
 
     $app->mount( '/scrape', new kino\scrapeControllerProvider() );
 
+    $app->mount( '/api', new kino\apiControllerProvider() );
+
     return $app;

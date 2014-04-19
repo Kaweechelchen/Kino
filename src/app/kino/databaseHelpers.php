@@ -35,8 +35,7 @@
                     'genre'             =>  $movie[ 'genre'          ],
                     'synopsis'          =>  $movie[ 'synopsis'       ],
                     '3d'                =>  $movie[ '3d'             ],
-                    'ageRestriction'    =>  $movie[ 'ageRestriction' ],
-                    'posterURL'         =>  $movie[ 'posterURL'      ]
+                    'ageRestriction'    =>  $movie[ 'ageRestriction' ]
                 )
             );
 
@@ -65,6 +64,8 @@
 
         static public function saveScreening ( $app, $screening ) {
 
+            if ( $screening[ 'datetime' ] != "" )
+
             $app['db']->insert(
                 'screenings',
                 array(
@@ -73,6 +74,43 @@
                     'datetime'  =>  $screening[ 'datetime' ]
                 )
             );
+
+        }
+
+        static public function saveCinemas ( $app, $cinemas ) {
+
+            foreach ($cinemas as $cinemaId => $cinemaName) {
+
+                if ( !self::cinemaExists( $app, $cinemaId ) ) {
+
+                    $app['db']->insert(
+                        'cinemas',
+                        array(
+                            'idCinema'  =>  $cinemaId,
+                            'name'      =>  $cinemaName
+                        )
+                    );
+
+                }
+
+            }
+
+        }
+
+        static public function cinemaExists ( $app, $cinemaId ) {
+
+            $cinemaExists_query  = 'SELECT idCinema
+                FROM cinemas
+                WHERE idCinema = ?';
+
+            $cinemaExists = $app['db']->fetchColumn(
+                $cinemaExists_query,
+                array(
+                    (int) $cinemaId
+                )
+            );
+
+            return $cinemaExists;
 
         }
 

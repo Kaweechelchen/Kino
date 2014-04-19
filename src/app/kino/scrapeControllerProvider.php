@@ -17,14 +17,14 @@
 
                 $url = 'http://www.rtl.lu/kultur/film-a-kino/programm/';
 
-                $proxy = 'http://getcontents.herokuapp.com/?url=';
-
-                $cinameData = file_get_contents( $proxy . $url );
+                $cinameData = ScrapeHelpers::getContent( $url );
 
                 //$cinameData  = file_get_contents('data/index.html');
 
                 $cinemaTable = ScrapeHelpers::getCinemaTable ( $cinameData  );
                 $cinemas     = ScrapeHelpers::getCinemas     ( $cinemaTable );
+
+                DatabaseHelpers::saveCinemas( $app, $cinemas );
 
                 if (date ('N') == 3) { // Check if we are Wednesday
                     $crawlDates[] = date( 'Ymd', strtotime('today') );
@@ -46,7 +46,6 @@
 
                 return true;
 
-
             });
 
             return $ctr;
@@ -59,9 +58,7 @@
 
             $url = urlencode( sprintf( $url, $cinemaId, $date ) );
 
-            $proxy = 'http://getcontents.herokuapp.com/?url=';
-
-            $screeningData = file_get_contents( $proxy . $url );
+            $screeningData = ScrapeHelpers::getContent( $url );
 
             //$screeningData = file_get_contents( 'data/deprogramm.html' );
 
@@ -77,7 +74,7 @@
 
             foreach ($movies as $key => $movieData) {
 
-                $movie[ 'id' ] = ScrapeHelpers::getMovieId    ( $movieData );
+                $movie[ 'id' ] = ScrapeHelpers::getMovieId ( $movieData );
 
                 if ( !DatabaseHelpers::movieIdExists( $app, $movie[ 'id' ] ) ) {
 
@@ -111,21 +108,19 @@
 
                     $url = urlencode( sprintf( $url, $movie['id'] ) );
 
-                    $proxy = 'http://getcontents.herokuapp.com/?url=';
-
-                    $movieMetaData = file_get_contents( $proxy . $url );
+                    $movieMetaData = ScrapeHelpers::getContent( $url );
 
                     //$movieMetaData = file_get_contents( 'data/film.html' );
 
                     $movieMetaData = html_entity_decode( $movieMetaData );
-
+                    
+                    ScrapeHelpers::getPoster( $movieMetaData, $movie[ 'id' ] );
 
                     $movie[ 'actors'         ] = ScrapeHelpers::getActors         ( $movieMetaData );
                     $movie[ 'duration'       ] = ScrapeHelpers::getDuration       ( $movieMetaData );
                     $movie[ 'genre'          ] = ScrapeHelpers::getGenre          ( $movieMetaData );
                     $movie[ 'synopsis'       ] = ScrapeHelpers::getSynopsis       ( $movieMetaData );
                     $movie[ 'ageRestriction' ] = ScrapeHelpers::getAgeRestriction ( $movieMetaData );
-                    $movie[ 'posterURL'      ] = ScrapeHelpers::getPosterUrl      ( $movieMetaData );
 
                     DatabaseHelpers::saveMovie( $app, $movie );
 
@@ -157,8 +152,6 @@
                             $screeningDate = date( 'Y-m-d', strtotime( $date + $weekDayCount ) );
 
                             $screening[ 'datetime' ] = $screeningDate . ' ' . $screeningTime;
-
-                            //echo "$screeningDate >> $screeningTime $weekDayCount<br />";
 
                             //echo $movie[ 'id' ]. ' ' .$screeningDateTime;
 

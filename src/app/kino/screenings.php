@@ -50,7 +50,8 @@
             $screening_query = 'SELECT
                 *
                 FROM screenings
-                WHERE idScreening = ?';
+                WHERE idScreening = ?
+                ORDER BY datetime';
 
             $screening = $app['db']->fetchAll(
                 $screening_query,
@@ -60,6 +61,27 @@
             );
 
             return $screening;
+
+        }
+
+        static public function getScreeningsAfterTimestamp( Application $app, $timestamp ) {
+
+            
+
+            $screenings_query = 'SELECT
+                *
+                FROM screenings
+                WHERE datetime > FROM_UNIXTIME( ? )
+                ORDER BY datetime';
+
+            $screenings = $app['db']->fetchAll(
+                $screenings_query,
+                array(
+                    $timestamp
+                )
+            );
+
+            return $screenings;
 
         }
 

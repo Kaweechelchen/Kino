@@ -153,6 +153,7 @@ a {
         font-size: 80%;
         margin: 0.4em 0;
         height: 3.6em;
+        overflow: hidden;
     }
 
 .email-item-selected {
