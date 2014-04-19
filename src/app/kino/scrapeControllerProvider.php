@@ -112,7 +112,7 @@
 
                     //$movieMetaData = file_get_contents( 'data/film.html' );
 
-                    $movieMetaData = html_entity_decode( $movieMetaData );
+                    $movieMetaData = html_entity_decode( $movieMetaData, ENT_QUOTES );
                     
                     ScrapeHelpers::getPoster( $movieMetaData, $movie[ 'id' ] );
 
