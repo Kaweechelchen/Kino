@@ -237,7 +237,7 @@
 
             $url = substr( $posterURL[0], 10, -2 );
             $img = __DIR__ . "/../../web/img/posters/$movieId.jpg";
-            file_put_contents($img, file_get_contents($url));
+            file_put_contents($img, self::getContent($url));
 
             return true;
 
