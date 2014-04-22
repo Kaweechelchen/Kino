@@ -7,5 +7,6 @@
         "dbname"    : "db_cinema_api",
         "user"      : "cinema_username",
         "password"  : "cinema_password"
-    }
+    },
+    "offline": true
 }

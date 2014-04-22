@@ -14,6 +14,8 @@
          */
         static public function getContent ( $url ) {
 
+            var_dump( $url ); exit;
+
             $proxy = 'http://getcontents.herokuapp.com/?url=';
 
             return file_get_contents( $proxy . $url );
@@ -227,7 +229,7 @@
          * @param  [string ] $movieData [Movie data from defined source]
          * @return [boolean]            [Bool if it worked]
          */
-        static public function getPoster ( $movieData, $movieId ) {
+        static public function getPoster ( $app, $movieData, $movieId ) {
 
             preg_match(
                 '/<img src="http:\/\/images.newmedia.lu\/rtl.lu\/kino\/affiches\/(.*?)">/',
@@ -237,7 +239,12 @@
 
             $url = substr( $posterURL[0], 10, -2 );
             $img = __DIR__ . "/../../web/img/posters/$movieId.jpg";
-            file_put_contents($img, self::getContent($url));
+
+            if ( !$app['offline'] ) {
+
+                file_put_contents($img, self::getContent($url));
+
+            }
 
             return true;
 
