@@ -8,5 +8,5 @@
         "user"      : "cinema_username",
         "password"  : "cinema_password"
     },
-    "offline": true
+    "offline": false
 }

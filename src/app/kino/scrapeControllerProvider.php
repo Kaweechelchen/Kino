@@ -140,10 +140,6 @@
                     $movie[ 'ageRestriction' ] = ScrapeHelpers::getAgeRestriction ( $movieMetaData );
                     $movie[ 'synopsis'       ] = ScrapeHelpers::getSynopsis       ( $movieMetaData ); 
 
-                    echo '<pre>';
-
-                    print_r( $movie );
-
                     DatabaseHelpers::saveMovie( $app, $movie );
 
                 }
@@ -173,7 +169,7 @@
 
                             $screeningDate = date( 'Y-m-d', strtotime( $date + $weekDayCount ) );
 
-                            $screening[ 'datetime' ] = $screeningDate . ' ' . $screeningTime;
+                            $screening[ 'datetime' ] = $screeningDate . ' ' . $screeningTime . ':00';
 
                             if ( !DatabaseHelpers::screeningExists( $app, $screening ) ) {
 

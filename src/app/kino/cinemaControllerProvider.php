@@ -19,8 +19,8 @@
 
                 return $app['twig']->render( 'new.twig',
                     array(
-                        'movies'        =>  Movies::getMovies( $app ),
-                        'screenings'    =>  Screenings::getUpcomingScreenings( $app )
+                        'movies'                =>  Movies::getMovies( $app ),
+                        'screeningsByShowtime'  =>  Screenings::getScreeningsByShowtime( $app )
                     )
                 );
 

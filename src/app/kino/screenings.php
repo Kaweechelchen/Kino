@@ -6,46 +6,79 @@
 
     class Screenings {
 
-        static public function getScreenings( Application $app ) {
+        static public function getScreeningsByShowtime ( Application $app ) {
 
-            $screenings_query = 'SELECT
-                *
-                FROM screenings
-                ORDER BY datetime';
+            foreach ( self::getUpcomingShowtimes( $app )  as $showtimeId => $showtime) {
 
-            $screenings = $app['db']->fetchAll(
-                $screenings_query
-            );
+                $moviesByShowtime = array();
 
-            foreach( $screenings as $screening ){
-                $idxScreenings[$screening['idScreening']] = $screening;
+                $moviesByShowtime_query = 'SELECT
+                    *
+                    FROM screenings
+                    WHERE fiShowtime = ?';
+
+                $moviesByShowtime = $app['db']->fetchAll(
+                    $moviesByShowtime_query,
+                    array(
+                        $showtimeId
+                    )
+                );
+
+                foreach ( $moviesByShowtime as $movie ) {
+
+                    $movies[ $movie[ 'fiMovie' ] ][] = $movie[ 'fiCinema' ];
+
+                }
+
+                $getScreeningsByShowtime[ $showtime['showtime'] ] = $movies;
+
             }
 
-            return $idxScreenings;
+            return $getScreeningsByShowtime;
 
         }
 
-        static public function getUpcomingScreenings( Application $app ) {
+        static public function getShowtimes ( Application $app ) {
 
-            $screenings_query = 'SELECT
+            $showtimes_query = 'SELECT
                 *
-                FROM screenings
-                WHERE datetime >= NOW()
-                ORDER BY datetime';
+                FROM showtimes
+                ORDER BY showtime';
 
-            $screenings = $app['db']->fetchAll(
-                $screenings_query
+            $showtimes = $app['db']->fetchAll(
+                $showtimes_query
             );
 
-            foreach( $screenings as $screening ){
-                $idxScreenings[$screening['idScreening']] = $screening;
+            foreach( $showtimes as $showtime ){
+                $idxShowtimes[$showtime['idShowtime']] = $showtime;
             }
 
-            return $idxScreenings;
+            return $idxShowtimes;
 
         }
 
-        static public function getScreeningsById( Application $app, $screeningId ) {
+        static public function getUpcomingShowtimes ( Application $app ) {
+
+            $showtimes_query = 'SELECT
+                *
+                FROM showtimes
+                WHERE showtime >= NOW()
+                ORDER BY showtime
+                LIMIT 10';
+
+            $showtimes = $app['db']->fetchAll(
+                $showtimes_query
+            );
+
+            foreach( $showtimes as $showtime ){
+                $idxShowtimes[$showtime['idShowtime']] = $showtime;
+            }
+
+            return $idxShowtimes;
+
+        }
+
+        static public function getScreeningsById ( Application $app, $screeningId ) {
 
             $screening_query = 'SELECT
                 *
@@ -64,9 +97,9 @@
 
         }
 
-        static public function getScreeningsAfterTimestamp( Application $app, $timestamp ) {
+        static public function getScreeningsAfterTimestamp ( Application $app, $timestamp ) {
 
-            
+
 
             $screenings_query = 'SELECT
                 *

@@ -14,8 +14,6 @@
          */
         static public function getContent ( $url ) {
 
-            var_dump( $url ); exit;
-
             $proxy = 'http://getcontents.herokuapp.com/?url=';
 
             return file_get_contents( $proxy . $url );

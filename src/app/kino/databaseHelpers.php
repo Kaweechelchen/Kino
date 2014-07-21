@@ -43,11 +43,12 @@
 
         static public function screeningExists( $app, $screening ) {
 
-            $screeningExists_query  = 'SELECT fiCinema, fiMovie, datetime
-                FROM screenings
+            $screeningExists_query  = 'SELECT fiCinema, fiMovie, showtime
+                FROM screenings, showtimes
                 WHERE fiCinema = ?
                 AND   fiMovie  = ?
-                AND   datetime = ?';
+                AND   showtime = ?
+                AND   fiShowtime = idShowtime';
 
             $screeningExists = $app['db']->fetchColumn(
                 $screeningExists_query,
@@ -64,16 +65,56 @@
 
         static public function saveScreening ( $app, $screening ) {
 
-            if ( $screening[ 'datetime' ] != "" )
+            if ( !empty( $screening[ 'datetime' ] ) && $screening[ 'datetime' ] != "0000-00-00 00:00:00" ) {
 
-            $app['db']->insert(
-                'screenings',
+                $app['db']->insert(
+                    'screenings',
+                    array(
+                        'fiCinema'      =>  $screening[ 'cinemaId' ],
+                        'fiMovie'       =>  $screening[ 'movieId'  ],
+                        'fiShowtime'    =>  self::saveShowtime ( $app, $screening[ 'datetime' ] )
+                    )
+                );
+
+            }
+
+        }
+
+        static public function saveShowtime ( $app, $showtime ) {
+
+            if ( !self::showtimeExists( $app, $showtime ) ) {
+
+                $app['db']->insert(
+                        'showtimes',
+                        array(
+                            'showtime'  =>  $showtime
+                        )
+                    );
+
+                return $app['db']->lastInsertId();
+
+            } else {
+
+                return self::showtimeExists( $app, $showtime );
+
+            }
+
+        }
+
+        static public function showtimeExists ( $app, $showtime ) {
+
+            $showtimeExists_query  = 'SELECT idshowtime
+                FROM showtimes
+                WHERE showtime = ?';
+
+            $showtimeExists = $app['db']->fetchColumn(
+                $showtimeExists_query,
                 array(
-                    'fiCinema'  =>  $screening[ 'cinemaId' ],
-                    'fiMovie'   =>  $screening[ 'movieId'  ],
-                    'datetime'  =>  $screening[ 'datetime' ]
+                    $showtime
                 )
             );
+
+            return $showtimeExists;
 
         }
 
