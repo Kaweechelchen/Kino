@@ -25,13 +25,19 @@ body {
   padding: 0 20px 0 0;
 }
 
-.time {
+.paddingLeft {
   padding: 0 20px;
+}
+
+.timeBlockTitle {
+  font-size: 20px;
+}
+
+.time {
   margin-top: 10px;
   padding-bottom: 10px;
   color: #999;
   font-weight: bold;
-  font-size: 20px;
 }
 
 .minutes {

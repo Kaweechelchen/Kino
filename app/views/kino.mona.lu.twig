@@ -29,10 +29,9 @@
 
     {% for time, screening in screenings %}
 
-        <div class="row time">
-            <div class="col-md-12">
-            <span class="screeningTime">{{ time }}</span>
-                <!--19<span class="minutes">00</span>-->
+        <div class="row time paddingLeft">
+            <div class="col-md-12 timeBlockTitle">
+            {{ time|date("H") }}<span class="minutes">{{ time|date("i") }}</span>
             </div>
         </div>
         <div class="row timeBlock">
@@ -47,7 +46,7 @@
                         {{ cinemas[cinemaId] }}<br />
                         {% endfor %}</p>
                     <!--<p class="ellipsis">{{ movies[movieId].synopsis }}</p>-->
-                    Ends at ~ <span class="screeningTime">{{ time + 15 * 60 + 60 * movies[movieId].runtime }}</span>
+                    Ends at ~<span class="time">{{ (time + 15 * 60 + 60 * movies[movieId].runtime)|date("H") }}<span class="minutes">{{ (time + 15 * 60 + 60 * movies[movieId].runtime)|date("m") }}</span></span>
                     <div class="clear"></div>
                 </div>
 
