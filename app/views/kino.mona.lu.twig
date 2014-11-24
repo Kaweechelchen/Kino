@@ -43,7 +43,10 @@
                 <div class="col-md-12 movie">
                     <img src="scrape/img/{{ movieId }}.jpg">
                     <h2>{{ movies[movieId].title }}</h2>
-                    <p class="ellipsis">{{ movies[movieId].synopsis }}</p>
+                    <p>{% for cinemaId in cinema %}
+                        {{ cinemas[cinemaId] }}<br />
+                        {% endfor %}</p>
+                    <!--<p class="ellipsis">{{ movies[movieId].synopsis }}</p>-->
                     <div class="clear"></div>
                 </div>
 
@@ -53,54 +56,9 @@
         </div>
     {% endfor %}
 
-        <div class="row time">
-            <div class="col-md-12">
-                19<span class="minutes">00</span>
-            </div>
-        </div>
-        <div class="row timeBlock">
-            <div class="col-md-12">
-                <div class="col-md-12 movie">
-                    <img src="img/mockingjay.jpg">
-                    <h2>Hunger Games</h2>
-                    <p class="ellipsis">Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <div class="clear"></div>
-                </div>
-                <div class="col-md-12 movie">
-                    <img src="img/nysm.jpg">
-                    <h2>Now You See Me</h2>
-                    <p class="ellipsis">Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <div class="clear"></div>
-                </div>
-            </div>
-        </div>
-
-
-      <div class="row time">
-        <div class="col-md-12">
-          19<span class="minutes">45</span>
-        </div>
-      </div>
-      <div class="row timeBlock">
-        <div class="col-md-12">
-          <div class="col-md-12 movie">
-          <img src="img/mockingjay.jpg">
-            <h2>Hunger Games</h2>
-            <p class="ellipsis">Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <div class="clear"></div>
-          </div>
-          <div class="col-md-12 movie">
-            <img src="img/nysm.jpg">
-            <h2>Now You See Me</h2>
-            <p class="ellipsis">Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <div class="clear"></div>
-          </div>
-        </div>
-      </div>
-
-      <footer>
-        <p>Made with <img class="emoji" src="img/heart.png" draggable="false" alt="♥" title="Red heart" aria-label="Emoji: Red heart"> on a laptop</p>
-      </footer>
+        <footer>
+            <p>Made with <img class="emoji" src="img/heart.png" draggable="false" alt="♥" title="Red heart" aria-label="Emoji: Red heart"> on a laptop</p>
+        </footer>
     </div> <!-- /container -->
 
 
