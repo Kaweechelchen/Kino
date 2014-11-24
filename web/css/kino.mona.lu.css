@@ -1,0 +1,96 @@
+body {
+  //padding-top: 50px;
+  background-color: #ececec;
+  color: #212121;
+  font-size: 13px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.emoji {
+  height: 1em;
+  width: 1em;
+  padding: 0 .05em 0 .1em;
+  vertical-align: -0.1em;
+}
+
+.timeBlock {
+  background-color: #ffffff;
+  box-shadow: 0 0 2px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.24);
+  margin: -1px 0 10px;
+}
+
+.movie {
+  border-top: solid 1px #E4E4E4;
+  max-height: 162px;
+  padding: 0 20px 0 0;
+}
+
+.time {
+  padding: 0 20px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  color: #999;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.minutes {
+  font-weight: normal;
+}
+
+.navbar {
+  padding: 0 20px;
+  border: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  z-index: 1030;
+  border-radius: 0;
+}
+
+.navbar-inverse {
+  padding: 0 20px;
+  background-color: #33AC71;
+  color: #fff;
+  box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+}
+
+.navbar-inverse .navbar-brand {
+  color: #fff;
+  font-size: 1.5em;
+  line-height: normal;
+  height: auto;
+}
+
+footer {
+  text-align: center;
+}
+
+.movie img {
+  float: left;
+  width: 110px;
+  margin-right: 20px;
+  margin-bottom: -1px;
+}
+
+.movie p {
+  max-height: 115px;
+}
+
+@media (max-width: 767px) {
+  .movie {
+    padding: 0 10px 0 0;
+  }
+  .movie img {
+    margin-right: 5px;
+  }
+  h2 {
+    margin: 5px 0 0 0;
+    font-size: 20px;
+  }
+}
+
+.clear {
+  clear: both;
+}

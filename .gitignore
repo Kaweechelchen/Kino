@@ -1,6 +1,2 @@
 .DS_Store
-src/vendor
-src/web/.htaccess
-src/app/config/development.json
-src/app/config/staging.json
-src/web/img/posters/
+web/scrape/img/
