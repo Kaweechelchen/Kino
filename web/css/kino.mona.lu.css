@@ -86,10 +86,6 @@ footer {
   margin-bottom: -1px;
 }
 
-.movie p {
-  max-height: 115px;
-}
-
 @media (max-width: 767px) {
   .movie {
     padding: 0 10px 0 0;
