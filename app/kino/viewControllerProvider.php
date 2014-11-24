@@ -29,7 +29,7 @@
 
             foreach ( $json[ 'screenings' ] as $time => $jsonScreening ) {
 
-                if ( $time > time() - (10*60)  ) {
+                if ( ($time > time() - (10*60) ) && ($time < time() + (36*60*60) ) ) {
 
                     $screenings[ $time ] = $jsonScreening;
 

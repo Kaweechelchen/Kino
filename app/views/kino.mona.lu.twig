@@ -44,9 +44,9 @@
                     <h2>{{ movies[movieId].title }}</h2>
                     <p>{% for cinemaId in cinema %}
                         {{ cinemas[cinemaId] }}<br />
-                        {% endfor %}</p>
+                        {% endfor %}
+                    Ends at ~<span class="time">{{ (time + 15 * 60 + 60 * movies[movieId].runtime)|date("H") }}<span class="minutes">{{ (time + 15 * 60 + 60 * movies[movieId].runtime)|date("m") }}</span></span></p>
                     <!--<p class="ellipsis">{{ movies[movieId].synopsis }}</p>-->
-                    Ends at ~<span class="time">{{ (time + 15 * 60 + 60 * movies[movieId].runtime)|date("H") }}<span class="minutes">{{ (time + 15 * 60 + 60 * movies[movieId].runtime)|date("m") }}</span></span>
                     <div class="clear"></div>
                 </div>
 
