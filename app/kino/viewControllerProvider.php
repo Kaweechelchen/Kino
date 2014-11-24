@@ -29,7 +29,7 @@
 
             foreach ( $json[ 'screenings' ] as $time => $jsonScreening ) {
 
-                if ( $time > time() ) {
+                if ( $time > time() - (10*60)  ) {
 
                     $screenings[ $time ] = $jsonScreening;
 
@@ -38,7 +38,6 @@
             }
 
             ksort( $screenings );
-
             return $screenings;
 
         }
