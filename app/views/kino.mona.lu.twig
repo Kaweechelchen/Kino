@@ -39,14 +39,16 @@
 
             {% for movieId, cinema in screening %}
 
-                <div class="col-md-12 movie">
+                <div class="col-md-12 movie" data-movieid="{{ movieId }}">
                     <img src="scrape/img/{{ movieId }}.jpg">
-                    <h2>{{ movies[movieId].title }}</h2>
-                    <p>{% for cinemaId in cinema %}
-                        {{ cinemas[cinemaId] }}<br />
-                        {% endfor %}
-                    Ends at ~<span class="time">{{ (time + 15 * 60 + 60 * movies[movieId].runtime)|date("H:i") }}</span></p>
-                    <!--<p class="ellipsis">{{ movies[movieId].synopsis }}</p>-->
+                    <div class="meta">
+                        <h2>{{ movies[movieId].title }}</h2>
+                        <p>{% for cinemaId in cinema %}
+                            {{ cinemas[cinemaId] }}<br />
+                            {% endfor %}
+                        Ends at ~<span class="time">{{ (time + 15 * 60 + 60 * movies[movieId].runtime)|date("H:i") }}</span></p>
+                        <p class="synopsis-{{ movieId }}">{{ movies[movieId].synopsis }}</p>
+                    </div>
                     <div class="clear"></div>
                 </div>
 

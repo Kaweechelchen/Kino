@@ -1,5 +1,5 @@
 body {
-  //padding-top: 50px;
+  padding-top: 5px;
   background-color: #ececec;
   color: #212121;
   font-size: 13px;
@@ -21,8 +21,11 @@ body {
 
 .movie {
   border-top: solid 1px #E4E4E4;
-  max-height: 162px;
   padding: 0 20px 0 0;
+}
+
+.meta {
+  margin-left: 130px;
 }
 
 .paddingLeft {
@@ -32,7 +35,6 @@ body {
 .timeBlockTitle {
   font-size: 20px;
   color: #999;
-  margin-top: 10px;
   padding-bottom: 10px;
 }
 
@@ -42,6 +44,10 @@ body {
 
 .minutes {
   font-weight: normal;
+}
+
+[class^="synopsis-"] {
+  display:none;
 }
 
 .navbar {
@@ -94,6 +100,9 @@ footer {
   h2 {
     margin: 5px 0 0 0;
     font-size: 20px;
+  }
+  .meta {
+    margin-left: 120px;
   }
 }
 
