@@ -31,7 +31,7 @@
 
         <div class="row time paddingLeft">
             <div class="col-md-12 timeBlockTitle">
-            {{ time|date("H") }}<span class="minutes">{{ time|date("i") }}</span>
+            {{ time|date("H:i") }}
             </div>
         </div>
         <div class="row timeBlock">
@@ -45,7 +45,7 @@
                     <p>{% for cinemaId in cinema %}
                         {{ cinemas[cinemaId] }}<br />
                         {% endfor %}
-                    Ends at ~<span class="time">{{ (time + 15 * 60 + 60 * movies[movieId].runtime)|date("H") }}<span class="minutes">{{ (time + 15 * 60 + 60 * movies[movieId].runtime)|date("m") }}</span></span></p>
+                    Ends at ~<span class="time">{{ (time + 15 * 60 + 60 * movies[movieId].runtime)|date("H:i") }}</span></p>
                     <!--<p class="ellipsis">{{ movies[movieId].synopsis }}</p>-->
                     <div class="clear"></div>
                 </div>
