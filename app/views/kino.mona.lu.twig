@@ -47,6 +47,7 @@
                         {{ cinemas[cinemaId] }}<br />
                         {% endfor %}</p>
                     <!--<p class="ellipsis">{{ movies[movieId].synopsis }}</p>-->
+                    Ends at ~ <span class="screeningTime">{{ time + 15 * 60 + 60 * movies[movieId].runtime }}</span>
                     <div class="clear"></div>
                 </div>
 
