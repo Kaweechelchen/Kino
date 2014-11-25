@@ -124,7 +124,8 @@
                     imagedestroy($src);
                     imagejpeg(
                         $poster,
-                        "scrape/img/" . $movie_lgs[ 'id' ] . ".jpg"
+                        "scrape/img/" . $movie_lgs[ 'id' ] . ".jpg",
+                        20
                     );
                     imagedestroy($poster);
 
