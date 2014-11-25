@@ -109,13 +109,24 @@
 
                     }
 
-                    file_put_contents(
-                        "scrape/img/" . $movie_lgs[ 'id' ] . ".jpg",
-                        fopen(
-                            $movie[ 'poster' ],
-                            'r'
+                    $size = getimagesize($movie[ 'poster' ]);
+                    $ratio = $size[0]/$size[1]; // width/height
+                    $width = 110;
+                    $height = 110/$ratio;
+
+                    $src = imagecreatefromstring(
+                        file_get_contents(
+                            $movie[ 'poster' ]
                         )
                     );
+                    $poster = imagecreatetruecolor($width,$height);
+                    imagecopyresampled($poster,$src,0,0,0,0,$width,$height,$size[0],$size[1]);
+                    imagedestroy($src);
+                    imagejpeg(
+                        $poster,
+                        "scrape/img/" . $movie_lgs[ 'id' ] . ".jpg"
+                    );
+                    imagedestroy($poster);
 
                     $movies[ $movie_lgs[ 'id' ] ] = $movie;
 
