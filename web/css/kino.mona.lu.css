@@ -100,6 +100,11 @@ footer {
   .meta {
     margin-left: 120px;
   }
+
+  .timeBlock {
+    box-shadow: 0 2px 4px rgba(0,0,0,.24);
+  }
+
 }
 
 .clear {
