@@ -111,8 +111,8 @@
 
                     $size = getimagesize($movie[ 'poster' ]);
                     $ratio = $size[0]/$size[1]; // width/height
-                    $width = 110;
-                    $height = 110/$ratio;
+                    $width = 220;
+                    $height = $width/$ratio;
 
                     $src = imagecreatefromstring(
                         file_get_contents(
