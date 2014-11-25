@@ -1,3 +1,4 @@
+var currentlyDisplaying;
 !function ($) {
 
     $(function(){
@@ -5,10 +6,21 @@
     });
 
     $( '.movie' ).on( "click", function() {
-        $( "[class^='synopsis-']" ).slideUp( function() {
-        });
-        $( '.synopsis-' + $( this ).data('movieid') ).slideDown( "slow", function() {
-        });
+
+        var movieId = $( this ).data('movieid');
+
+        if ( movieId != currentlyDisplaying ) {
+
+            $( "[class^='synopsis-']" ).slideUp( function() {
+
+            });
+
+            $( '.synopsis-' + movieId ).slideDown( "slow", function() {
+                currentlyDisplaying = movieId;
+            });
+
+        }
+
     });
 
 }(window.jQuery);
