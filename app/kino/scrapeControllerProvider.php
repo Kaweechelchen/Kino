@@ -9,45 +9,6 @@
 
     class scrapeControllerProvider implements ControllerProviderInterface {
 
-        /**
-         * This function returns an array of
-         * @param  [type] $app       Silex Application
-         * @param  [type] $stationId the id of a busStation
-         * @param  [type] $limit     The limit of results you want to get back
-         * @return [type]            Array of bus journeys
-         */
-        static public function mobilityData ( $app, $stationId, $limit ) {
-
-            // Getting the json from Mobiliteit.lu
-            // [input] is the id of the station you want to get bus departures for
-            // [time] is the time of the day you want the earliest departure for
-            // [maxjourneys] is the amount of journeys you want to get
-            $mobilityData = file_get_contents(
-                'http://travelplanner.mobiliteit.lu/'
-                . 'hafas/cdt/stboard.exe/en?L=vs_stb'
-                . '&start=yes'
-                . '&requestType=0'
-                . '&input=' . $stationId
-                . '&time=' . date( "H:i" )
-                . '&maxJourneys=' . $limit );
-
-            // Removing the random string in front of the json which
-            // mobiliteit.lu returns
-            $mobilityData = substr( $mobilityData, 14 );
-
-            // Converting the json to an array
-            // you need to pass true as 2nd parameter if you want to avoid
-            // stdClass in the array
-            $mobilityData = json_decode(
-                $mobilityData,
-                true
-            );
-
-            // returning the array
-            return $mobilityData;
-
-        }
-
         static public function getXMLData( $url ) {
 
             $xml  = file_get_contents( $url );

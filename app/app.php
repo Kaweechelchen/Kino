@@ -11,19 +11,11 @@
 
     $app = new Silex\Application();
 
-    $app['debug'] = true;
-
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/views',
     ));
 
-    $app->mount( '/api/1/', new kino\apiControllerProvider() );
-
     $app->mount( '/scrape', new kino\scrapeControllerProvider() );
-
-    $app->get('/api', function () use ( $app ) {
-        return $app->redirect('/api/1/');
-    });
 
     $app->mount( '/', new kino\viewControllerProvider() );
 
