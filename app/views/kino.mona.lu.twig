@@ -31,6 +31,9 @@
 
         <div class="row time paddingLeft">
             <div class="col-md-12 timeBlockTitle">
+            {% if time|date("z") != "now"|date("z") %}
+                Tomorrow
+            {% endif %}
             {{ time|date("H:i") }}
             </div>
         </div>
