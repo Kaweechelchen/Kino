@@ -128,11 +128,8 @@
                     json_encode( $result )
                 );
 
-                // return the $busses variable containing all of the information
-                // we just gathered
                 return 'scrape complete';
 
-                // setting a default value for limit if none was set
             });
 
             // return the controller
