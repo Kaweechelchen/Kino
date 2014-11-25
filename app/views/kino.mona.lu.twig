@@ -46,10 +46,12 @@
                     <img src="scrape/img/{{ movieId }}.jpg">
                     <div class="meta">
                         <h2>{{ movies[movieId].title }}</h2>
-                        <p>{% for cinemaId in cinema %}
-                            {{ cinemas[cinemaId] }}<br />
+                        <p>
+                            {{ movies[movieId].language }}<br />
+                            {% for cinemaId in cinema %}
+                                {{ cinemas[cinemaId] }}<br />
                             {% endfor %}
-                        Ends at ~<span class="time">{{ (time + 15 * 60 + 60 * movies[movieId].runtime)|date("H:i") }}</span></p>
+                            Ends at ~<span class="time">{{ (time + 15 * 60 + 60 * movies[movieId].runtime)|date("H:i") }}</span></p>
                         <p class="synopsis-{{ time }}{{ movieId }}">{{ movies[movieId].synopsis }}</p>
                     </div>
                     <div class="clear"></div>
