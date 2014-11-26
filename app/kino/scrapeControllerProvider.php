@@ -86,9 +86,10 @@
 
                 foreach ( $movies_lgc as $movie_lgs ) {
 
-                    $movie[ 'title' ] = $movie_lgs[ 'title' ];
+                    $movie[ 'title' ]    = $movie_lgs[ 'title' ];
                     $movie[ 'synopsis' ] = $movie_lgs[ 'synopsis' ];
-                    $movie[ 'runtime' ] = $movie_lgs[ 'runtime' ];
+
+                    $movie[ 'runtime' ]  = (int) $movie_lgs[ 'runtime' ];
                     $movie[ 'language' ] = $movie_lgs[ 'version' ];
 
                     if ( in_array( 'poster', $movie_lgs[ 'media' ][ 'image' ] ) ) {

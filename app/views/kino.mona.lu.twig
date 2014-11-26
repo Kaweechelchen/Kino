@@ -60,11 +60,15 @@
                     <div class="meta">
                         <h2>{{ movies[movieId].title }}</h2>
                         <p>
-                            {{ movies[movieId].language }}<br />
+                            {% if movies[movieId].language is defined %}
+                                {{ movies[movieId].language }}<br />
+                            {% endif %}
                             {% for cinemaId in cinema %}
                                 {{ cinemas[cinemaId] }}<br />
                             {% endfor %}
-                            Ends at ~{{ (time + 15 * 60 + 60 * movies[movieId].runtime)|date("H:i") }}</p>
+                            {% if movies[movieId].runtime != 0 %}
+                                Ends at ~{{ (time + 15 * 60 + 60 * movies[movieId].runtime)|date("H:i") }}
+                            {% endif %}</p>
                         <p class="synopsis-{{ time }}{{ movieId }}">{{ movies[movieId].synopsis }}</p>
                     </div>
                     <div class="clear"></div>
