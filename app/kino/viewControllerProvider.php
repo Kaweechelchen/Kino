@@ -20,7 +20,7 @@
 
         }
 
-        static public function getUpcomingScreenings( Application $app ) {
+        static public function getUpcomingScreenings( Application $app, $cinema ) {
 
             $json = json_decode(
                 file_get_contents( 'api.json' ),
@@ -31,7 +31,33 @@
 
                 if ( ($time > time() - (10*60) ) && ($time < time() + (36*60*60) ) ) {
 
-                    $screenings[ $time ] = $jsonScreening;
+                    if ( isset( $cinema ) ){
+
+                        switch ( $cinema ) {
+
+                            case 'kirchberg': $requestedCinemaId = 'lu1';  break;
+                            case 'belval':    $requestedCinemaId = 'lu23'; break;
+                            case 'utopia':    $requestedCinemaId = 'lu2';  break;
+
+                        }
+
+                        foreach ($jsonScreening as $movie => $cinemaId) {
+
+
+                            if ( in_array( $requestedCinemaId, $cinemaId ) ) {
+
+                                $screenings[ $time ][$movie] = $cinemaId;
+
+                            }
+
+                        }
+
+
+                    } else {
+
+                        $screenings[ $time ] = $jsonScreening;
+
+                    }
 
                 }
 
@@ -63,6 +89,17 @@
                     array(
                         'cinemas'    => self::getCinemas            ( $app ),
                         'screenings' => self::getUpcomingScreenings ( $app ),
+                        'movies'     => self::getMovies             ( $app )
+                    )
+                );
+            });
+
+            $ctr->get( '/{cinema}', function( Application $app, $cinema ) {
+                return $app['twig']->render(
+                    'kino.mona.lu.twig',
+                    array(
+                        'cinemas'    => self::getCinemas            ( $app ),
+                        'screenings' => self::getUpcomingScreenings ( $app, $cinema ),
                         'movies'     => self::getMovies             ( $app )
                     )
                 );
