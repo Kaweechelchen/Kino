@@ -92,45 +92,31 @@
                     $movie[ 'runtime' ]  = (int) $movie_lgs[ 'runtime' ];
                     $movie[ 'language' ] = $movie_lgs[ 'version' ];
 
-                    if ( in_array( 'poster', $movie_lgs[ 'media' ][ 'image' ] ) ) {
+                    if ( array_key_exists( 'image', $movie_lgs[ 'media' ] ) ) {
 
-                        $movie[ 'poster' ] = $movie_lgs[ 'media' ][ 'image' ][ 'url' ];
+                        if ( in_array( 'poster', $movie_lgs[ 'media' ][ 'image' ] ) ) {
 
-                    } else {
+                            $movie[ 'poster' ] = $movie_lgs[ 'media' ][ 'image' ][ 'url' ];
 
-                        foreach ( $movie_lgs[ 'media' ][ 'image' ] as $image ) {
+                        } else {
 
-                            if ( in_array( 'poster', $image ) ) {
+                            foreach ( $movie_lgs[ 'media' ][ 'image' ] as $image ) {
 
-                                $movie[ 'poster' ] = $image[ 'url' ];
+                                if ( in_array( 'poster', $image ) ) {
+
+                                    $movie[ 'poster' ] = $image[ 'url' ];
+
+                                }
 
                             }
 
                         }
 
+                        self::saveThumbnail( $app, $movie_lgs[ 'id' ], $movie[ 'poster' ], 220 );
+
+                        $movies[ $movie_lgs[ 'id' ] ] = $movie;
+
                     }
-
-                    $size = getimagesize($movie[ 'poster' ]);
-                    $ratio = $size[0]/$size[1]; // width/height
-                    $width = 220;
-                    $height = $width/$ratio;
-
-                    $src = imagecreatefromstring(
-                        file_get_contents(
-                            $movie[ 'poster' ]
-                        )
-                    );
-                    $poster = imagecreatetruecolor($width,$height);
-                    imagecopyresampled($poster,$src,0,0,0,0,$width,$height,$size[0],$size[1]);
-                    imagedestroy($src);
-                    imagejpeg(
-                        $poster,
-                        "scrape/img/" . $movie_lgs[ 'id' ] . ".jpg",
-                        20
-                    );
-                    imagedestroy($poster);
-
-                    $movies[ $movie_lgs[ 'id' ] ] = $movie;
 
                 }
 
@@ -147,6 +133,29 @@
 
             // return the controller
             return $ctr;
+
+        }
+
+        static public function saveThumbnail( $app, $movieId, $poster, $width ) {
+
+            $size   = getimagesize( $poster );
+            $ratio  = $size[0]/$size[1]; // width/height
+            $height = $width/$ratio;
+
+            $src = imagecreatefromstring(
+                file_get_contents(
+                    $poster
+                )
+            );
+            $poster = imagecreatetruecolor($width,$height);
+            imagecopyresampled($poster,$src,0,0,0,0,$width,$height,$size[0],$size[1]);
+            imagedestroy($src);
+            imagejpeg(
+                $poster,
+                "scrape/img/$movieId.jpg",
+                20
+            );
+            imagedestroy($poster);
 
         }
 

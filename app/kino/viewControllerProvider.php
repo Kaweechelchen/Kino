@@ -31,7 +31,8 @@
 
                 if ( ($time > time() - (10*60) ) && ($time < time() + (36*60*60) ) ) {
 
-                    if ( isset( $cinema ) ){
+                    $cinamas = array('kirchberg', 'belval', 'utopia');
+                    if ( in_array( $cinema, $cinamas ) ) {
 
                         switch ( $cinema ) {
 
@@ -88,7 +89,7 @@
                     'kino.mona.lu.twig',
                     array(
                         'cinemas'    => self::getCinemas            ( $app ),
-                        'screenings' => self::getUpcomingScreenings ( $app ),
+                        'screenings' => self::getUpcomingScreenings ( $app, 'all' ),
                         'movies'     => self::getMovies             ( $app )
                     )
                 );
