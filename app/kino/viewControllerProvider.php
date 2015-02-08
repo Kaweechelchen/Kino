@@ -20,7 +20,7 @@
 
         }
 
-        static public function getUpcomingScreenings( Application $app, $cinema ) {
+        static public function getUpcomingScreenings( Application $app, $cinema = false ) {
 
             $json = json_decode(
                 file_get_contents( 'api.json' ),
@@ -89,13 +89,14 @@
                     'kino.mona.lu.twig',
                     array(
                         'cinemas'    => self::getCinemas            ( $app ),
-                        'screenings' => self::getUpcomingScreenings ( $app, 'all' ),
+                        'screenings' => self::getUpcomingScreenings ( $app ),
                         'movies'     => self::getMovies             ( $app )
                     )
                 );
             });
 
             $ctr->get( '/{cinema}', function( Application $app, $cinema ) {
+
                 return $app['twig']->render(
                     'kino.mona.lu.twig',
                     array(
@@ -104,6 +105,7 @@
                         'movies'     => self::getMovies             ( $app )
                     )
                 );
+
             });
 
             // return the controller
