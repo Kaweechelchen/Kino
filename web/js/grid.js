@@ -382,10 +382,11 @@ var Grid = (function() {
 					href : $itemEl.attr( 'href' ),
 					largesrc : $itemEl.data( 'largesrc' ),
 					title : $itemEl.data( 'title' ),
+					language : $itemEl.data( 'language' ),
 					description : $itemEl.data( 'description' )
 				};
 
-			this.$title.html( eldata.title );
+			this.$title.html( eldata.title + '<span class="language">' + eldata.language + '</span>' );
 			this.$description.html( eldata.description );
 			this.$href.attr( 'href', eldata.href );
 

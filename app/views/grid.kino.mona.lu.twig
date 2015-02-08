@@ -48,7 +48,13 @@
           {% for movieId, screening in screenings %}
 
             <li>
-              <a name="{{ movieId }}" data-largesrc="/scrape/img/lg_{{ movieId }}.jpg" data-title="{{ movies[movieId].title }}" data-description="
+              <a name="{{ movieId }}" data-largesrc="/scrape/img/lg_{{ movieId }}.jpg" data-title="{{ movies[movieId].title }}"
+              data-language="
+              {% if movies[movieId].language is defined %}
+                {{ movies[movieId].language }}
+              {% endif %}
+              "
+              data-description="
               {{ movies[movieId].synopsis }}<br /><br />
 
                 {% set tomorrow = false %}
