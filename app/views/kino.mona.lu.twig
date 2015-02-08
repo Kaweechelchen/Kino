@@ -42,47 +42,47 @@
 
     {% for time, screening in screenings %}
 
-        <div class="row time paddingLeft">
-            <div class="col-md-12 timeBlockTitle">
-            {% if time|date("z") != "now"|date("z") %}
-                Tomorrow
-            {% endif %}
-            {{ time|date("H:i") }}
-            </div>
+      <div class="row time paddingLeft">
+        <div class="col-md-12 timeBlockTitle">
+        {% if time|date("z") != "now"|date("z") %}
+          Tomorrow
+        {% endif %}
+        {{ time|date("H:i") }}
         </div>
-        <div class="row timeBlock">
-            <div class="col-md-12">
+      </div>
+      <div class="row timeBlock">
+        <div class="col-md-12">
 
-            {% for movieId, cinema in screening %}
+        {% for movieId, cinema in screening %}
 
-                <div class="col-md-12 movie" data-movieid="{{ time }}{{ movieId }}">
-                    <img src="/scrape/img/{{ movieId }}.jpg">
-                    <div class="meta">
-                        <h2>{{ movies[movieId].title }}</h2>
-                        <p>
-                            {% if movies[movieId].language is defined %}
-                                {{ movies[movieId].language }}<br />
-                            {% endif %}
-                            {% for cinemaId in cinema %}
-                                {{ cinemas[cinemaId] }}<br />
-                            {% endfor %}
-                            {% if movies[movieId].runtime != 0 %}
-                                Ends at ~{{ (time + 15 * 60 + 60 * movies[movieId].runtime)|date("H:i") }}
-                            {% endif %}</p>
-                        <p class="synopsis-{{ time }}{{ movieId }}">{{ movies[movieId].synopsis }}</p>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-
-            {% endfor %}
-
+          <div class="col-md-12 movie" data-movieid="{{ time }}{{ movieId }}">
+            <img src="/scrape/img/{{ movieId }}.jpg">
+            <div class="meta">
+              <h2>{{ movies[movieId].title }}</h2>
+              <p>
+                {% if movies[movieId].language is defined %}
+                  {{ movies[movieId].language }}<br />
+                {% endif %}
+                {% for cinemaId in cinema %}
+                  {{ cinemas[cinemaId] }}<br />
+                {% endfor %}
+                {% if movies[movieId].runtime != 0 %}
+                  Ends at ~{{ (time + 15 * 60 + 60 * movies[movieId].runtime)|date("H:i") }}
+                {% endif %}</p>
+              <p class="synopsis-{{ time }}{{ movieId }}">{{ movies[movieId].synopsis }}</p>
             </div>
+            <div class="clear"></div>
+          </div>
+
+        {% endfor %}
+
         </div>
+      </div>
     {% endfor %}
 
-        <footer>
-            <p>Made with <img class="emoji" src="img/heart.png" draggable="false" alt="♥" title="Red heart" aria-label="Emoji: Red heart"> on a laptop</p>
-        </footer>
+      <footer>
+        <p>Made with <img class="emoji" src="img/heart.png" draggable="false" alt="♥" title="Red heart" aria-label="Emoji: Red heart"> on a laptop</p>
+      </footer>
     </div> <!-- /container -->
 
 
@@ -99,7 +99,6 @@
 
       ga('create', 'UA-30971852-11', 'auto');
       ga('send', 'pageview');
-
     </script>
   </body>
 </html>
