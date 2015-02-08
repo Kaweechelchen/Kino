@@ -142,6 +142,7 @@
                 return $app['twig']->render(
                   'kino.mona.lu.twig',
                   array(
+                    'title'      => $cinema,
                     'cinemas'    => self::getCinemas            ( $app ),
                     'screenings' => self::getUpcomingScreenings ( $app, $cinema ),
                     'movies'     => self::getMovies             ( $app )
