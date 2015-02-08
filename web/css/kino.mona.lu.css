@@ -1,9 +1,10 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 body {
   padding-top: 5px;
   background-color: #ececec;
   color: #212121;
   font-size: 13px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Lato', Calibri, Arial, sans-serif;
 }
 
 .emoji {
