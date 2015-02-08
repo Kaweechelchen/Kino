@@ -1,4 +1,4 @@
 .DS_Store
-web/scrape/img/
 vendor
 api.json
+*.jpg
