@@ -48,6 +48,7 @@
 
 .og-expander-inner {
 	padding: 50px 30px;
+	padding: 15px;
 	height: 100%;
 }
 
@@ -86,7 +87,6 @@
 
 .og-fullimg,
 .og-details {
-	width: 50%;
 	float: left;
 	height: 100%;
 	overflow: hidden;
@@ -95,10 +95,12 @@
 
 .og-details {
 	padding: 0 40px 0 20px;
+	width: 70%;
 }
 
 .og-fullimg {
 	text-align: center;
+	width: 30%;
 }
 
 .og-fullimg img {
@@ -109,14 +111,12 @@
 
 .og-details h3 {
 	font-weight: 300;
-	font-size: 52px;
-	padding: 40px 0 10px;
+	font-size: 2em;
 	margin-bottom: 10px;
 }
 
 .og-details p {
 	font-weight: 400;
-	font-size: 16px;
 	line-height: 22px;
 }
 
