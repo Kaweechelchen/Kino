@@ -124,7 +124,18 @@
               );
             });
 
-            $ctr->get( '/{cinema}', function( Application $app, $cinema ) {
+            $ctr->get('/api/', function(  ) use ( $app ) {
+              return $app->json(
+
+                json_decode(
+                  file_get_contents( 'api.json' ),
+                  true
+                )
+
+              );
+            });
+
+            $ctr->get( '/{cinema}/', function( Application $app, $cinema ) {
 
               if ( $cinema == 'grid' ) {
 
