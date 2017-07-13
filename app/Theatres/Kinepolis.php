@@ -175,4 +175,49 @@ class Kinepolis
 
         $this->data = json_decode($match[1], true);
     }
+
+    public function genres()
+    {
+        return $this->data['genres'];
+    }
+
+    public function languages()
+    {
+        return $this->data['languages'];
+    }
+
+    public function categories()
+    {
+        return $this->data['categories'];
+    }
+
+    public function formats()
+    {
+        return $this->data['formats'];
+    }
+
+    public function types()
+    {
+        return $this->data['types'];
+    }
+
+    public function countries()
+    {
+        return $this->data['countries'];
+    }
+
+    public function theatres()
+    {
+        return $this->data['theatres'];
+    }
+
+    public function movies()
+    {
+        return $this->data['movies'];
+    }
+
+    public function screenings()
+    {
+        return $this->data['screenings'];
+    }
 }
