@@ -104,7 +104,7 @@ class Kinepolis
                     'hall'     => self::getScreeingHall($screeningRaw['screen']),
                     'format'   => (int) $screeningRaw['format'],
                     'language' => self::getScreeningLanguage($screeningRaw['version']),
-                    'time'     => strtotime($screeningRaw['date'].' '.$screeningRaw['time']),
+                    'time'     => date('Y-m-d H:i:s', strtotime($screeningRaw['date'].' '.$screeningRaw['time'])),
                 ];
 
                 $screenings[] = $screening;
