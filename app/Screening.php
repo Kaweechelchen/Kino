@@ -10,11 +10,6 @@ class Screening extends Model
 
     public function scopeUpcoming($query)
     {
-        return $query->where('screening', '>', date('Y-m-d H:i:s'))->orderBy('screening');
-    }
-
-    public function movie()
-    {
-        return $this->belongsTo(Movie::class);
+        return $query->where('screening', '>', date('Y-m-d H:i:s'));
     }
 }

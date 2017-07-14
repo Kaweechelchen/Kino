@@ -16,6 +16,7 @@ use App\Movieactor;
 use App\GenreMovie;
 use App\CategoryMovie;
 use App\Screening;
+use App\MovieScreening;
 
 class ScrapeController extends Controller
 {
@@ -112,12 +113,18 @@ class ScrapeController extends Controller
         }
 
         foreach (app('Kinepolis')->screenings() as $screening) {
-            Screening::updateOrCreate(
+            $screening_id = Screening::updateOrCreate(
                 [
-                    'movie_id'   => $screening['movie'],
-                    'theatre_id' => $screening['theatre'],
-                    'hall'       => $screening['hall'],
-                    'screening'  => $screening['time'],
+                    'screening' => $screening['time'],
+                ]
+            )->id;
+
+            MovieScreening::updateOrCreate(
+                [
+                    'movie_id'     => $screening['movie'],
+                    'theatre_id'   => $screening['theatre'],
+                    'hall'         => $screening['hall'],
+                    'screening_id' => $screening_id,
                 ],
                 [
                     'format_id'   => $screening['format'],
