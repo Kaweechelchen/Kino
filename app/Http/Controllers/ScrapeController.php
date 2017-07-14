@@ -10,7 +10,11 @@ use App\Type;
 use App\Country;
 use App\Theatre;
 use App\Movie;
-use App\MovieTitle;
+use App\Movietitle;
+use App\Moviedirector;
+use App\Movieactor;
+use App\Moviegenre;
+use App\Moviecategory;
 
 class ScrapeController extends Controller
 {
@@ -60,17 +64,51 @@ class ScrapeController extends Controller
             );
 
             foreach ($movie['titles'] as $language_id => $title) {
-                MovieTitle::updateOrCreate(
-                [
-                    'movie_id'    => $movieId,
-                    'language_id' => $language_id,
-                ],
-                ['title' => $title]
-            );
+                Movietitle::updateOrCreate(
+                    [
+                        'movie_id'    => $movieId,
+                        'language_id' => $language_id,
+                    ],
+                    ['title' => $title]
+                );
+            }
+
+            foreach ($movie['directors'] as $director) {
+                Moviedirector::updateOrCreate(
+                    [
+                        'movie_id' => $movieId,
+                        'director' => $director,
+                    ]
+                );
+            }
+
+            foreach ($movie['cast'] as $actor) {
+                Movieactor::updateOrCreate(
+                    [
+                        'movie_id' => $movieId,
+                        'actor'    => $actor,
+                    ]
+                );
+            }
+
+            foreach ($movie['genres'] as $genre_id) {
+                Moviegenre::updateOrCreate(
+                    [
+                        'movie_id' => $movieId,
+                        'genre_id' => $genre_id,
+                    ]
+                );
+            }
+
+            foreach ($movie['categories'] as $category_id) {
+                Moviecategory::updateOrCreate(
+                    [
+                        'movie_id'    => $movieId,
+                        'category_id' => $category_id,
+                    ]
+                );
             }
         }
-
-        dd(app('Kinepolis')->movies());
 
         dd(app('Kinepolis')->data());
     }

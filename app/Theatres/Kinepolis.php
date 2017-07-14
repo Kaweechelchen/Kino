@@ -60,13 +60,17 @@ class Kinepolis
             $genres = [];
             if (isset($movie['genre'])) {
                 foreach ($movie['genre'] as $genre) {
-                    $genres[] = (int) $genre;
+                    if (isset($result['genres'][(int) $genre])) {
+                        $genres[] = (int) $genre;
+                    }
                 }
             }
             $categories = [];
             if (isset($movie['category'])) {
                 foreach ($movie['category'] as $category) {
-                    $categories[] = (int) $category;
+                    if (isset($result['categories'][(int) $category])) {
+                        $categories[] = (int) $category;
+                    }
                 }
             }
             $country = null;
