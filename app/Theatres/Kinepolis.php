@@ -82,13 +82,13 @@ class Kinepolis
             $result['movies'][$movie['uuid']] = [
                 'imdb'       => $imdb,
                 'titles'     => $titles,
-                'synopsys'   => $movie['small_synopsys'],
+                'synopsis'   => $movie['small_synopsys'] ? $movie['small_synopsys'] : null,
                 'country'    => $country,
                 'directors'  => $directors,
                 'cast'       => $cast,
                 'genres'     => $genres,
                 'categories' => $categories,
-                'length'     => (int) $movie['length'],
+                'length'     => (int) $movie['length'] ? (int) $movie['length'] : null,
             ];
 
             $screenings = [];

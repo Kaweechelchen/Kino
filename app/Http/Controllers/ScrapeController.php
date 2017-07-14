@@ -9,6 +9,8 @@ use App\Format;
 use App\Type;
 use App\Country;
 use App\Theatre;
+use App\Movie;
+use App\MovieTitle;
 
 class ScrapeController extends Controller
 {
@@ -46,7 +48,30 @@ class ScrapeController extends Controller
             Theatre::updateOrCreate(['id' => $theatreId], ['theatre' => $theatre]);
         }
 
-        dd(app('Kinepolis')->genres());
+        foreach (app('Kinepolis')->movies() as $movieId => $movie) {
+            Movie::updateOrCreate(
+                ['id' => $movieId],
+                [
+                    'synopsis'   => $movie['synopsis'],
+                    'length'     => $movie['length'],
+                    'imdb'       => $movie['imdb'],
+                    'country_id' => $movie['country'],
+                ]
+            );
+
+            foreach ($movie['titles'] as $language_id => $title) {
+                MovieTitle::updateOrCreate(
+                [
+                    'movie_id'    => $movieId,
+                    'language_id' => $language_id,
+                ],
+                ['title' => $title]
+            );
+            }
+        }
+
+        dd(app('Kinepolis')->movies());
+
         dd(app('Kinepolis')->data());
     }
 }
