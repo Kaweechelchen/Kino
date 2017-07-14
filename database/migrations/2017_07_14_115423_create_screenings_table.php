@@ -12,6 +12,7 @@ class CreateScreeningsTable extends Migration
     public function up()
     {
         Schema::create('screenings', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('movie_id')->unsigned();
             $table->string('theatre_id');
             $table->string('hall');
@@ -20,14 +21,12 @@ class CreateScreeningsTable extends Migration
             $table->dateTime('screening');
             $table->timestamps();
 
-            $table->primary(
-                [
-                    'movie_id',
-                    'theatre_id',
-                    'hall',
-                    'screening',
-                ]
-            );
+            $table->unique([
+                'movie_id',
+                'theatre_id',
+                'hall',
+                'screening',
+            ]);
 
             $table->foreign('movie_id')
                 ->references('id')

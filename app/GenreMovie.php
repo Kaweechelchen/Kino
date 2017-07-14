@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Moviegenre extends Model
+class GenreMovie extends Model
 {
     protected $guarded = [];
+    protected $table   = 'genre_movie';
 }

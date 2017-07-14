@@ -12,11 +12,12 @@ class CreateMovieactorsTable extends Migration
     public function up()
     {
         Schema::create('movieactors', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('movie_id')->unsigned();
             $table->string('actor');
             $table->timestamps();
 
-            $table->primary(['movie_id', 'actor']);
+            $table->unique(['movie_id', 'actor']);
 
             $table->foreign('movie_id')
                 ->references('id')

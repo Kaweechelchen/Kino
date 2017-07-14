@@ -13,8 +13,8 @@ use App\Movie;
 use App\Movietitle;
 use App\Moviedirector;
 use App\Movieactor;
-use App\Moviegenre;
-use App\Moviecategory;
+use App\GenreMovie;
+use App\CategoryMovie;
 use App\Screening;
 
 class ScrapeController extends Controller
@@ -93,7 +93,7 @@ class ScrapeController extends Controller
             }
 
             foreach ($movie['genres'] as $genre_id) {
-                Moviegenre::updateOrCreate(
+                GenreMovie::updateOrCreate(
                     [
                         'movie_id' => $movieId,
                         'genre_id' => $genre_id,
@@ -102,7 +102,7 @@ class ScrapeController extends Controller
             }
 
             foreach ($movie['categories'] as $category_id) {
-                Moviecategory::updateOrCreate(
+                CategoryMovie::updateOrCreate(
                     [
                         'movie_id'    => $movieId,
                         'category_id' => $category_id,
