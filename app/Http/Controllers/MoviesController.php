@@ -20,24 +20,8 @@ class MoviesController extends Controller
         $movie      = json_decode(Redis::get('morroni:movies:movies'), true);
         $screenings = json_decode(Redis::get('morroni:movies:screenings'), true);
 
-        /*return compact(
-            'theatre',
-            'language',
-            'format',
-            'country',
-            'movie',
-            'screenings'
-        );
-
-        return json_decode(Redis::get('screenings'), true);
-
-        return compact(
-            //'screenings',
-            'theatres',
-            'languages',
-            'formats',
-            'movieTitles'
-        );*/
+        $movie      = $movie ? $movie : [];
+        $screenings = $screenings ? $screenings : [];
 
         return view(
             'screenings',
