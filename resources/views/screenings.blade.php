@@ -6,7 +6,7 @@
         <div class="well">
         @foreach($movies as $movieId => $languageScreenings)
             <div class="well">
-                <img src="{{ URL::to('/storage/posters/'.$movieId.'.jpg') }}" />
+                <img src="/storage/posters/{{ $movieId }}.jpg" />
             @foreach ($languageScreenings as $languageId => $theatres)
 
                 <b>{{$movie[$movieId]['titles'][preg_replace('/_(.*)/', '', $languageId)] }}</b>
