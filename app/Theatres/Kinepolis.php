@@ -103,7 +103,7 @@ class Kinepolis
                     'theatre'  => $screeningRaw['theater'],
                     'hall'     => self::getScreeingHall($screeningRaw['screen']),
                     'format'   => (int) $screeningRaw['format'],
-                    'language' => self::getScreeningLanguage($screeningRaw['version']),
+                    'language' => $screeningRaw['version'],
                     'time'     => date('Y-m-d H:i:s', strtotime($screeningRaw['date'].' '.$screeningRaw['time'])),
                 ];
 
@@ -127,7 +127,7 @@ class Kinepolis
     protected function getFilterAsArray($filterName, $data)
     {
         $filterRawRegex = '/filter-select-'.$filterName.'">(.*)<\/select/';
-        $filterRegex    = '/(\d+)">([^<]*)<\//';
+        $filterRegex    = '/"([^"]+)">([^<]*)<\//';
 
         if (!preg_match($filterRawRegex, $data, $filterRaw)) {
             throw new Exception("Couldn't find $filterName.");
@@ -139,21 +139,13 @@ class Kinepolis
         $array = [];
 
         foreach ($filterArray[1] as $key => $id) {
+            if ($id == 'all') {
+                continue;
+            }
             $array[$id] = $filterArray[2][$key];
         }
 
         return $array;
-    }
-
-    protected function getScreeningLanguage($version)
-    {
-        $languageIdRegex = '/(\d+)(?!.*\d)/';
-
-        if (!preg_match($languageIdRegex, $version, $language)) {
-            return null;
-        }
-
-        return (int) $language[1];
     }
 
     protected function getScreeingHall($screen)

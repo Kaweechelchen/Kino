@@ -7,9 +7,9 @@
                 @foreach($movies as $movieId => $languageScreenings)
                     <div class="well">
                         @foreach ($languageScreenings as $languageId => $theatres)
+
                             <b>Title: {{ $movie[$movieId]['titles'][$languageId] }}</b>
                             <i>{{ $language[$languageId] }}</i>
-
                             <ul>
                                 @foreach ($theatres as $theatreId => $theatreMeta)
                                     <li>

@@ -18,7 +18,7 @@ class CreateMovieScreeningsTable extends Migration
             $table->string('theatre_id');
             $table->string('hall');
             $table->integer('format_id')->unsigned();
-            $table->integer('language_id')->unsigned();
+            $table->string('language_id');
             $table->timestamps();
 
             $table->unique([

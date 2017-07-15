@@ -14,7 +14,7 @@ class CreateMovietitlesTable extends Migration
         Schema::create('movietitles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('movie_id')->unsigned();
-            $table->integer('language_id')->unsigned();
+            $table->string('language_id');
             $table->string('title');
             $table->timestamps();
 
