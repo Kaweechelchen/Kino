@@ -4,7 +4,7 @@
             <input
                 type="checkbox"
                 :value="idTheatre"
-                v-model="displayTheatres"
+                v-model="checked"
                 @change="updateTheatres">
             <label :for="idTheatre">{{ name }}</label>
         </div>
@@ -20,7 +20,22 @@
         ],
         methods: {
             updateTheatres: function() {
-                this.$emit('updateTheatres', this.displayTheatres)
+                this.$emit('updateTheatres', this.proxy)
+            }
+        },
+        computed: {
+            checked: {
+                get() {
+                    return this.displayTheatres;
+                },
+                set(value) {
+                    this.proxy = value;
+                }
+            }
+        },
+        data() {
+            return {
+                proxy: false
             }
         }
     }

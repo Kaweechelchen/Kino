@@ -4,7 +4,7 @@
             <input
                 type="checkbox"
                 :value="idLanguage"
-                v-model="displayLanguages"
+                v-model="checked"
                 @change="updateLanguages">
             <label :for="idLanguage">{{ languages }}</label>
         </div>
@@ -20,7 +20,22 @@
         ],
         methods: {
             updateLanguages: function() {
-                this.$emit('updateLanguages', this.displayLanguages)
+                this.$emit('updateLanguages', this.proxy)
+            }
+        },
+        computed: {
+            checked: {
+                get() {
+                    return this.displayLanguages;
+                },
+                set(value) {
+                    this.proxy = value;
+                }
+            }
+        },
+        data() {
+            return {
+                proxy: false
             }
         }
     }

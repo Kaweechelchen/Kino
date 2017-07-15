@@ -1639,8 +1639,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['languages', 'displayLanguages'],
     methods: {
         updateLanguages: function updateLanguages() {
-            this.$emit('updateLanguages', this.displayLanguages);
+            this.$emit('updateLanguages', this.proxy);
         }
+    },
+    computed: {
+        checked: {
+            get: function get() {
+                return this.displayLanguages;
+            },
+            set: function set(value) {
+                this.proxy = value;
+            }
+        }
+    },
+    data: function data() {
+        return {
+            proxy: false
+        };
     }
 });
 
@@ -1715,7 +1730,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 CSCDI: 'Ciné Scala Diekirch',
                 CSURA: 'Ciné Sura'
             },
-            displayTheatres: ['UKRCH'],
+            displayTheatres: ['UCUTO', 'CSTAR', 'UBVAL', 'UKRCH'],
             languages: {
                 '302': 'Original version (Subtitles: French/German)',
                 '305': 'Original version (Subtitles: English)',
@@ -1946,8 +1961,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['theatres', 'displayTheatres'],
     methods: {
         updateTheatres: function updateTheatres() {
-            this.$emit('updateTheatres', this.displayTheatres);
+            this.$emit('updateTheatres', this.proxy);
         }
+    },
+    computed: {
+        checked: {
+            get: function get() {
+                return this.displayTheatres;
+            },
+            set: function set(value) {
+                this.proxy = value;
+            }
+        }
+    },
+    data: function data() {
+        return {
+            proxy: false
+        };
     }
 });
 
@@ -32064,32 +32094,32 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       directives: [{
         name: "model",
         rawName: "v-model",
-        value: (_vm.displayLanguages),
-        expression: "displayLanguages"
+        value: (_vm.checked),
+        expression: "checked"
       }],
       attrs: {
         "type": "checkbox"
       },
       domProps: {
         "value": idLanguage,
-        "checked": Array.isArray(_vm.displayLanguages) ? _vm._i(_vm.displayLanguages, idLanguage) > -1 : (_vm.displayLanguages)
+        "checked": Array.isArray(_vm.checked) ? _vm._i(_vm.checked, idLanguage) > -1 : (_vm.checked)
       },
       on: {
         "change": _vm.updateLanguages,
         "__c": function($event) {
-          var $$a = _vm.displayLanguages,
+          var $$a = _vm.checked,
             $$el = $event.target,
             $$c = $$el.checked ? (true) : (false);
           if (Array.isArray($$a)) {
             var $$v = idLanguage,
               $$i = _vm._i($$a, $$v);
             if ($$c) {
-              $$i < 0 && (_vm.displayLanguages = $$a.concat($$v))
+              $$i < 0 && (_vm.checked = $$a.concat($$v))
             } else {
-              $$i > -1 && (_vm.displayLanguages = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+              $$i > -1 && (_vm.checked = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
             }
           } else {
-            _vm.displayLanguages = $$c
+            _vm.checked = $$c
           }
         }
       }
@@ -32211,32 +32241,32 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       directives: [{
         name: "model",
         rawName: "v-model",
-        value: (_vm.displayTheatres),
-        expression: "displayTheatres"
+        value: (_vm.checked),
+        expression: "checked"
       }],
       attrs: {
         "type": "checkbox"
       },
       domProps: {
         "value": idTheatre,
-        "checked": Array.isArray(_vm.displayTheatres) ? _vm._i(_vm.displayTheatres, idTheatre) > -1 : (_vm.displayTheatres)
+        "checked": Array.isArray(_vm.checked) ? _vm._i(_vm.checked, idTheatre) > -1 : (_vm.checked)
       },
       on: {
         "change": _vm.updateTheatres,
         "__c": function($event) {
-          var $$a = _vm.displayTheatres,
+          var $$a = _vm.checked,
             $$el = $event.target,
             $$c = $$el.checked ? (true) : (false);
           if (Array.isArray($$a)) {
             var $$v = idTheatre,
               $$i = _vm._i($$a, $$v);
             if ($$c) {
-              $$i < 0 && (_vm.displayTheatres = $$a.concat($$v))
+              $$i < 0 && (_vm.checked = $$a.concat($$v))
             } else {
-              $$i > -1 && (_vm.displayTheatres = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+              $$i > -1 && (_vm.checked = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
             }
           } else {
-            _vm.displayTheatres = $$c
+            _vm.checked = $$c
           }
         }
       }

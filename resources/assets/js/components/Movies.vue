@@ -38,6 +38,9 @@
                     CSURA: 'Ciné Sura'
                 },
                 displayTheatres: [
+                    'UCUTO',
+                    'CSTAR',
+                    'UBVAL',
                     'UKRCH'
                 ],
                 languages: {
