@@ -15,7 +15,12 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+Vue.component('theatre-select', require('./components/TheatreSelect.vue'));
+Vue.component('language-select', require('./components/LanguageSelect.vue'));
+Vue.component('screening', require('./components/Screening.vue'));
+Vue.component('movies', require('./components/Movies.vue'));
+Vue.component('movie', require('./components/Movie.vue'));
+Vue.component('version', require('./components/Version.vue'));
 
 const app = new Vue({
     el: '#app'
