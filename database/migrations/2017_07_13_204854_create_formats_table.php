@@ -12,10 +12,9 @@ class CreateFormatsTable extends Migration
     public function up()
     {
         Schema::create('formats', function (Blueprint $table) {
-            $table->integer('id')->unsigned();
+            $table->integer('id')->unsigned()->primary();
             $table->string('format');
             $table->timestamps();
-            $table->primary('id');
         });
     }
 

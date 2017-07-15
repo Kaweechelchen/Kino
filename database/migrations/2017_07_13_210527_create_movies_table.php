@@ -12,13 +12,12 @@ class CreateMoviesTable extends Migration
     public function up()
     {
         Schema::create('movies', function (Blueprint $table) {
-            $table->integer('id')->unsigned();
+            $table->integer('id')->unsigned()->primary();
             $table->longText('synopsis')->nullable()->default(null);
             $table->integer('length')->nullable()->default(null);
             $table->string('imdb')->nullable()->default(null);
             $table->integer('country_id')->unsigned()->nullable()->default(null);
             $table->timestamps();
-            $table->primary('id');
 
             $table->foreign('country_id')
                 ->references('id')

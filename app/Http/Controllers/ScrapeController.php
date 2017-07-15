@@ -132,7 +132,5 @@ class ScrapeController extends Controller
                 ]
             );
         }
-
-        dd(app('Kinepolis')->data());
     }
 }

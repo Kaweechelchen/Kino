@@ -12,6 +12,7 @@ class CreateMovieScreeningsTable extends Migration
     public function up()
     {
         Schema::create('movie_screening', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('movie_id')->unsigned();
             $table->integer('screening_id')->unsigned();
             $table->string('theatre_id');

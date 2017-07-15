@@ -12,10 +12,9 @@ class CreateTheatresTable extends Migration
     public function up()
     {
         Schema::create('theatres', function (Blueprint $table) {
-            $table->string('id');
+            $table->string('id')->primary();
             $table->string('theatre');
             $table->timestamps();
-            $table->primary('id');
         });
     }
 

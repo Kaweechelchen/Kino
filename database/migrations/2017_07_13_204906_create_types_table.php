@@ -12,10 +12,9 @@ class CreateTypesTable extends Migration
     public function up()
     {
         Schema::create('types', function (Blueprint $table) {
-            $table->integer('id')->unsigned();
+            $table->integer('id')->unsigned()->primary();
             $table->string('type');
             $table->timestamps();
-            $table->primary('id');
         });
     }
 
