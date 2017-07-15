@@ -1,32 +1,23 @@
 @extends('layout')
 @section('content')
     <div class="col-md-9">
-        @foreach ($screenings as $key => $screening)
+        @foreach ($screenings as $screening => $movies)
+            {{ date('H:i', strtotime($screening)) }}
             <div class="well">
-                @foreach ($screening->movies as $key => $movie)
+                @foreach($movies as $movieId => $languageScreenings)
                     <div class="well">
-                        <ul>
+                        @foreach ($languageScreenings as $languageId => $theatres)
+                            <b>Title: {{ $movie[$movieId]['titles'][$languageId] }}</b>
+                            <i>{{ $language[$languageId] }}</i>
 
-                            <li>
-                                {{ $movie }}
-                            </li>
-
-                            <li>
-                                {{ $movieTitles->where('movie_id', $movie->id)->where('language_id', $movie->pivot->language_id)->first()['title'] }}
-                            </li>
-
-                            <li>
-                                {{ $formats->find($movie->pivot->format_id)->format }}
-                            </li>
-
-                            <li>
-                                {{ $languages->find($movie->pivot->language_id)->language }}
-                            </li>
-
-                            <li>
-                                {{ $theatres->find($movie->pivot->theatre_id)->theatre }}
-                            </li>
-                        </ul>
+                            <ul>
+                                @foreach ($theatres as $theatreId => $theatreMeta)
+                                    <li>
+                                        Theatre: {{ $theatre[$theatreId] }} >> {{ $theatreMeta['hall'] }} >> {{ $format[$theatreMeta['format']] }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endforeach
                     </div>
                 @endforeach
             </div>
