@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Movie;
-use App\Format;
 use App\MovieTitle;
 use App\Screening;
 use Illuminate\Support\Facades\Redis;
@@ -34,7 +33,7 @@ class CacheController extends Controller
             foreach ($screeningRaw['movies'] as $key => $movie) {
                 $screening[$movie->id][$movie->pivot->language_id][$movie->pivot->theatre_id] = [
                     'hall'   => $movie->pivot->hall,
-                    'format' => Format::find($movie->pivot->format_id)->value('format'),
+                    'format' => $movie->pivot->format_id,
                 ];
             }
             $screenings[$screeningRaw['screening']] = $screening;
