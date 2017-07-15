@@ -42,7 +42,7 @@ class Kinepolis
 
             $titles = [];
             foreach ($movie['variants'] as $language => $variant) {
-                $titles[(int) $language] = $variant['title'];
+                $titles[$language] = $variant['title'];
             }
 
             $directors = [];
@@ -150,9 +150,9 @@ class Kinepolis
 
     protected function getScreeingHall($screen)
     {
-        $languageIdRegex = '/(\d+)(?!.*\d)/';
+        $getScreeingHalIdRegex = '/(\d+)(?!.*\d)/';
 
-        if (!preg_match($languageIdRegex, $screen, $hall)) {
+        if (!preg_match($getScreeingHalIdRegex, $screen, $hall)) {
             return null;
         }
 
