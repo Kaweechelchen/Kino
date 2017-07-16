@@ -1729,9 +1729,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         updateTheatres: function updateTheatres(displayTheatres) {
+            localStorage.setItem('displayTheatres', JSON.stringify(displayTheatres));
             this.displayTheatres = displayTheatres;
         },
         updateLanguages: function updateLanguages(displayLanguages) {
+            localStorage.setItem('displayLanguages', JSON.stringify(displayLanguages));
             this.displayLanguages = displayLanguages;
         }
     },
@@ -1771,6 +1773,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             return screenings;
         }
+    },
+    mounted: function mounted() {
+        if (localStorage.getItem('displayLanguages')) this.displayLanguages = JSON.parse(localStorage.getItem('displayLanguages'));
+        if (localStorage.getItem('displayTheatres')) this.displayTheatres = JSON.parse(localStorage.getItem('displayTheatres'));
     }
 });
 

@@ -49,9 +49,11 @@
         },
         methods: {
             updateTheatres: function(displayTheatres) {
+                localStorage.setItem('displayTheatres', JSON.stringify(displayTheatres))
                 this.displayTheatres = displayTheatres
             },
             updateLanguages: function(displayLanguages) {
+                localStorage.setItem('displayLanguages', JSON.stringify(displayLanguages))
                 this.displayLanguages = displayLanguages
             }
         },
@@ -93,6 +95,12 @@
                 }
                 return screenings
             }
+        },
+        mounted: function () {
+            if (localStorage.getItem('displayLanguages'))
+                this.displayLanguages = JSON.parse(localStorage.getItem('displayLanguages'))
+            if (localStorage.getItem('displayTheatres'))
+                this.displayTheatres = JSON.parse(localStorage.getItem('displayTheatres'))
         }
     }
 </script>
