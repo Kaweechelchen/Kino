@@ -12,6 +12,11 @@
                 class="border-bottom"
                 v-on:updateLanguages="updateLanguages">
             </language-select>
+            <format-select
+                :displayFormats="displayFormats"
+                class="border-bottom"
+                v-on:updateFormats="updateFormats">
+            </format-select>
             <footer class="center hidden-xs">
                 <a href="https://github.com/kaweechelchen/kino" target="_blank"><i title="coded" class="fa fa-code" aria-hidden="true"></i></a> with <i title="love" class="fa fa-heart red pulse" aria-hidden="true"></i> by <a href="https://twitter.com/FAQ">Tezza</a>
                 <br />Logo made by <a href="http://www.flaticon.com/authors/dimi-kazak" target="_blank" title="Dimi Kazak">Dimi Kazak</a> from <a href="http://www.flaticon.com" target="_blank" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
@@ -81,8 +86,7 @@
                     '730'
                 ],
                 displayFormats: [
-                    '497',
-                    '500'
+                    '497'
                 ]
             }
         },
@@ -94,6 +98,10 @@
             updateLanguages: function(displayLanguages) {
                 localStorage.setItem('displayLanguages', JSON.stringify(displayLanguages))
                 this.displayLanguages = displayLanguages
+            },
+            updateFormats: function(displayFormats) {
+                localStorage.setItem('displayFormats', JSON.stringify(displayFormats))
+                this.displayFormats = displayFormats
             }
         },
         computed: {
@@ -140,6 +148,8 @@
                 this.displayLanguages = JSON.parse(localStorage.getItem('displayLanguages'))
             if (localStorage.getItem('displayTheatres'))
                 this.displayTheatres = JSON.parse(localStorage.getItem('displayTheatres'))
+            if (localStorage.getItem('displayFormats'))
+                this.displayFormats = JSON.parse(localStorage.getItem('displayFormats'))
         }
     }
 </script>

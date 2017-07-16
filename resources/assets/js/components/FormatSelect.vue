@@ -1,35 +1,35 @@
 <template>
-    <div class="LanguageSelectContainer">
-        <div v-for="(language, idLanguage) in languages">
+    <div class="FormatSelectContainer">
+        <div v-for="(format, ifFormat) in formats">
             <input
                 type="checkbox"
-                :id="idLanguage"
-                :value="idLanguage"
+                :id="ifFormat"
+                :value="ifFormat"
                 v-model="checked"
                 @change="updateLanguages">
-            <label :for="idLanguage">{{ language }}</label>
+            <label :for="ifFormat">{{ format }}</label>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'LanguageSelect',
+        name: 'FormatSelect',
         props: [
-            'displayLanguages'
+            'displayFormats'
         ],
         methods: {
             updateLanguages: function() {
-                this.$emit('updateLanguages', this.proxy)
+                this.$emit('updateFormats', this.proxy)
             }
         },
         computed: {
-            languages() {
-                return window.languages
+            formats() {
+                return window.formats
             },
             checked: {
                 get() {
-                    return this.displayLanguages;
+                    return this.displayFormats;
                 },
                 set(value) {
                     this.proxy = value;

@@ -65,7 +65,7 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/LanguageSelect.vue":
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/FormatSelect.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -77,6 +77,50 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'FormatSelect',
+    props: ['displayFormats'],
+    methods: {
+        updateLanguages: function updateLanguages() {
+            this.$emit('updateFormats', this.proxy);
+        }
+    },
+    computed: {
+        formats: function formats() {
+            return window.formats;
+        },
+
+        checked: {
+            get: function get() {
+                return this.displayFormats;
+            },
+            set: function set(value) {
+                this.proxy = value;
+            }
+        }
+    },
+    data: function data() {
+        return {
+            proxy: false
+        };
+    }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/LanguageSelect.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -237,6 +281,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -246,7 +295,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             screeningsRaw: screenings,
             displayTheatres: ['UCUTO', 'CSTAR', 'UBVAL', 'UKRCH'],
             displayLanguages: ['302', '305', '313', '727', '728', '730'],
-            displayFormats: ['497', '500']
+            displayFormats: ['497']
         };
     },
 
@@ -258,6 +307,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         updateLanguages: function updateLanguages(displayLanguages) {
             localStorage.setItem('displayLanguages', JSON.stringify(displayLanguages));
             this.displayLanguages = displayLanguages;
+        },
+        updateFormats: function updateFormats(displayFormats) {
+            localStorage.setItem('displayFormats', JSON.stringify(displayFormats));
+            this.displayFormats = displayFormats;
         }
     },
     computed: {
@@ -300,6 +353,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         if (localStorage.getItem('displayLanguages')) this.displayLanguages = JSON.parse(localStorage.getItem('displayLanguages'));
         if (localStorage.getItem('displayTheatres')) this.displayTheatres = JSON.parse(localStorage.getItem('displayTheatres'));
+        if (localStorage.getItem('displayFormats')) this.displayFormats = JSON.parse(localStorage.getItem('displayFormats'));
     }
 });
 
@@ -452,21 +506,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     }
 });
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-281ba0c7\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/LanguageSelect.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\ninput[type=\"checkbox\"]:checked + label[data-v-281ba0c7]:before {\n    background: #617CE7;\n    border-color: #617CE7;\n}\n", ""]);
-
-// exports
-
 
 /***/ }),
 
@@ -5192,13 +5231,13 @@ if (false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-281ba0c7\",\"hasScoped\":true}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/LanguageSelect.vue":
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-281ba0c7\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/LanguageSelect.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "LanguageSelectContainer"
-  }, _vm._l((_vm.languages), function(languages, idLanguage) {
+  }, _vm._l((_vm.languages), function(language, idLanguage) {
     return _c('div', [_c('input', {
       directives: [{
         name: "model",
@@ -5237,7 +5276,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "for": idLanguage
       }
-    }, [_vm._v(_vm._s(languages))])])
+    }, [_vm._v(_vm._s(language))])])
   }))
 },staticRenderFns: []}
 module.exports.render._withStripped = true
@@ -5301,6 +5340,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "updateLanguages": _vm.updateLanguages
     }
+  }), _vm._v(" "), _c('format-select', {
+    staticClass: "border-bottom",
+    attrs: {
+      "displayFormats": _vm.displayFormats
+    },
+    on: {
+      "updateFormats": _vm.updateFormats
+    }
   }), _vm._v(" "), _vm._m(0)], 1), _vm._v(" "), _c('div', {
     staticClass: "col-sm-9 col-lg-10"
   }, _vm._l((_vm.screenings), function(movies, screening) {
@@ -5360,6 +5407,64 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-4a673dd4", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-564f3d66\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/FormatSelect.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "FormatSelectContainer"
+  }, _vm._l((_vm.formats), function(format, ifFormat) {
+    return _c('div', [_c('input', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: (_vm.checked),
+        expression: "checked"
+      }],
+      attrs: {
+        "type": "checkbox",
+        "id": ifFormat
+      },
+      domProps: {
+        "value": ifFormat,
+        "checked": Array.isArray(_vm.checked) ? _vm._i(_vm.checked, ifFormat) > -1 : (_vm.checked)
+      },
+      on: {
+        "change": _vm.updateLanguages,
+        "__c": function($event) {
+          var $$a = _vm.checked,
+            $$el = $event.target,
+            $$c = $$el.checked ? (true) : (false);
+          if (Array.isArray($$a)) {
+            var $$v = ifFormat,
+              $$i = _vm._i($$a, $$v);
+            if ($$c) {
+              $$i < 0 && (_vm.checked = $$a.concat($$v))
+            } else {
+              $$i > -1 && (_vm.checked = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+            }
+          } else {
+            _vm.checked = $$c
+          }
+        }
+      }
+    }), _vm._v(" "), _c('label', {
+      attrs: {
+        "for": ifFormat
+      }
+    }, [_vm._v(_vm._s(format))])])
+  }))
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-564f3d66", module.exports)
   }
 }
 
@@ -5478,33 +5583,6 @@ if (false) {
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-d72d1520", module.exports)
   }
-}
-
-/***/ }),
-
-/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-281ba0c7\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/LanguageSelect.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-281ba0c7\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/LanguageSelect.vue");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("561db127", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-281ba0c7\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./LanguageSelect.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-281ba0c7\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./LanguageSelect.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
 }
 
 /***/ }),
@@ -16004,6 +16082,7 @@ Vue.component('movies', __webpack_require__("./resources/assets/js/components/Mo
 Vue.component('movie', __webpack_require__("./resources/assets/js/components/Movie.vue"));
 Vue.component('version', __webpack_require__("./resources/assets/js/components/Version.vue"));
 Vue.component('theatre', __webpack_require__("./resources/assets/js/components/Theatre.vue"));
+Vue.component('format-select', __webpack_require__("./resources/assets/js/components/FormatSelect.vue"));
 
 var app = new Vue({
   el: '#app'
@@ -16011,23 +16090,60 @@ var app = new Vue({
 
 /***/ }),
 
+/***/ "./resources/assets/js/components/FormatSelect.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
+  /* script */
+  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/FormatSelect.vue"),
+  /* template */
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-564f3d66\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/FormatSelect.vue"),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/thierry/repos/Kino/resources/assets/js/components/FormatSelect.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] FormatSelect.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-564f3d66", Component.options)
+  } else {
+    hotAPI.reload("data-v-564f3d66", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/components/LanguageSelect.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-281ba0c7\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/LanguageSelect.vue")
-}
 var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
   /* script */
   __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/LanguageSelect.vue"),
   /* template */
-  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-281ba0c7\",\"hasScoped\":true}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/LanguageSelect.vue"),
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-281ba0c7\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/LanguageSelect.vue"),
   /* styles */
-  injectStyle,
+  null,
   /* scopeId */
-  "data-v-281ba0c7",
+  null,
   /* moduleIdentifier (server only) */
   null
 )
