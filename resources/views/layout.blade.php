@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Tezza (https://twitter.com/FAQ)">
-    <meta name="description" content="Movie Showtimes 🍿 by Morroni Studios">
-    <meta property="og:title" content="Movie Showtimes 🍿 by Morroni Studios" />
+    <meta name="description" content="Movie Showtimes 🍿">
+    <meta property="og:title" content="Movie Showtimes 🍿" />
     <meta property="og:description" content="Upcoming movie screenings in theatres of Luxembourg" />
     <meta property="og:image" content="{{ env('APP_URL') }}/img/logo.svg" />
     <link rel="shortcut icon" href="{{ env('APP_URL') }}/img/logo.svg" />
-    <title>Movies 🍿 &middot; Morroni Studios</title>
+    <title>Movies 🍿</title>
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
 </head>
 
