@@ -38,10 +38,6 @@
         border-radius: 3px;
         transition: all 250ms ease-in-out;
     }
-    label:hover {
-        background: #FFF;
-        border-color: #CCC;
-    }
     label:before {
         content: " ";
         position: absolute;
