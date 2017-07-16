@@ -5,9 +5,67 @@
 // Variables
 @import "variables";
 
+@import "node_modules/font-awesome/scss/font-awesome";
+
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 body {
     background: url(/../img/bg.png)
+}
+.pulse {
+    -webkit-animation: pulsing 2.5s infinite;
+    animation: pulsing 2.5s infinite;
+}
+.red {
+    color: rgba(229,57,53 ,1);
+}
+@-webkit-keyframes pulsing {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1)
+    }
+    5% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2)
+    }
+    10% {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    15% {
+        -webkit-transform: scale(1.3);
+        transform: scale(1.3)
+    }
+    100%,
+    50% {
+        -webkit-transform: scale(1);
+        transform: scale(1)
+    }
+}
+@keyframes pulsing {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1)
+    }
+    5% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2)
+    }
+    10% {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    15% {
+        -webkit-transform: scale(1.3);
+        transform: scale(1.3)
+    }
+    100%,
+    50% {
+        -webkit-transform: scale(1);
+        transform: scale(1)
+    }
+}
+.center {
+    text-align: center;
 }
