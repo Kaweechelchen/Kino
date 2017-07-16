@@ -1,4 +1,5 @@
 let mix = require('laravel-mix');
+let webpack = require('webpack');
 
 /*
  |--------------------------------------------------------------------------
@@ -17,3 +18,10 @@ mix.js('resources/assets/js/app.js', 'public/js')
    .disableNotifications();
 
 mix.copy('resources/assets/img/', 'public/img/', false);
+
+mix.webpackConfig({
+  plugins: [
+   // reduce bundle size by ignoring moment js local files
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+  ]
+});
