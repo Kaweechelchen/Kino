@@ -7,6 +7,7 @@
             <div class="col-sm-10 col-xs-9 metaData">
                 <theatre
                     v-for="(versions, theatre) in theatres"
+                    :key="theatre"
                     :theatre="theatre"
                     :versions="versions">
                 </theatre>

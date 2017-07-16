@@ -3,6 +3,7 @@
         {{ theatres[theatre] }}
         <version
             v-for="(theatreMeta, version) in versions"
+            :key="version"
             :version="version"
             :theatreMeta="theatreMeta">
         </version>

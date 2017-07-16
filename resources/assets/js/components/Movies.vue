@@ -1,7 +1,7 @@
 <template>
     <div class="MoviesContainer row">
         <div class="col-sm-3 col-lg-2 sideBar">
-            <h1 class="border-bottom">Movies 🍿</h1>
+            <h1 class="title">Movies 🍿</h1>
             <theatre-select
                 :displayTheatres="displayTheatres"
                 class="border-bottom"
@@ -24,9 +24,10 @@
                 <br />Data scraped from Kinepolis
             </footer>
         </div>
-        <div class="col-sm-9 col-lg-10">
+        <div class="col-sm-9 col-lg-10 col-sm-offset-3 col-lg-offset-2 screenings">
             <screening
                 v-for="(movies, screening) in screenings"
+                :key="screening"
                 :screening="screening"
                 :movies="movies">
             </screening>
@@ -51,8 +52,18 @@
         color: #636b6f
 
     .sideBar
+        position: fixed
         border-right: 1px solid #eee
         height: 100%
+        overflow-y: scroll
+        padding-top: 6em
+
+    .screenings
+        position: fixed
+        overflow-y: scroll
+        left: 0
+        top: 0
+        height: 100vh
 
     footer
         font-size: 0.7em
@@ -61,6 +72,14 @@
         padding-bottom: 0.5em
         margin: 0.5em 0
         border-bottom: 1px solid #eee
+
+    .title
+        margin: 0 0 0.5em 0
+        padding: 0.5em 0
+        border-bottom: 1px solid #eee
+        position: fixed
+        top: 0
+        background-color: #fff
 
 </style>
 

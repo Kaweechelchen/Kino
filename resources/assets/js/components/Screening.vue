@@ -3,6 +3,7 @@
         {{ screening | displayScreeningTime }}
         <movie
             v-for="(theatres, movie) in movies"
+            :key="movie"
             :movie="movie"
             :theatres="theatres">
         </movie>
