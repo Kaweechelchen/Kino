@@ -1718,156 +1718,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            theatres: {
-                UCUTO: 'Ciné Utopia',
-                CSTAR: 'Ciné Starlight',
-                UBVAL: 'Kinepolis Belval',
-                UKRCH: 'Kinepolis Kirchberg',
-                CMAAC: 'Cinémaacher',
-                CORIO: 'Ciné Orion',
-                CPARI: 'Ciné Le Paris',
-                CPRAB: 'Ciné Prabbeli',
-                CSCDI: 'Ciné Scala Diekirch',
-                CSURA: 'Ciné Sura'
-            },
+            theatres: theatres,
             displayTheatres: ['UCUTO', 'CSTAR', 'UBVAL', 'UKRCH'],
-            languages: {
-                '302': 'Original version (Subtitles: French/German)',
-                '305': 'Original version (Subtitles: English)',
-                '313': 'Original version (Subtitles: French)',
-                '727': 'German version',
-                '728': 'French version',
-                '730': 'Original version',
-                '728_305': 'French version (Subtitles: English)',
-                '730_305': 'Original version (Subtitles: English)',
-                '730_313': 'Original version (Subtitles: French)',
-                '730_313-302': 'Original version (Subtitles: French/German)',
-                '730_393-313': 'Original version (Subtitles: Dutch/French'
-            },
+            languages: languages,
             displayLanguages: ['302', '305', '313', '727', '728', '730'],
             displayFormats: ['497'],
-            screeningsRaw: {
-                "2017-07-15 13:45:00": {
-                    "45762": {
-                        "728": {
-                            "UKRCH": {
-                                "hall": "6",
-                                "format": 497
-                            }
-                        },
-                        "727": {
-                            "UKRCH": {
-                                "hall": "2",
-                                "format": 497
-                            },
-                            "CSCDI": {
-                                "hall": "4",
-                                "format": 500
-                            }
-                        },
-                        "730_313-302": {
-                            "UKRCH": {
-                                "hall": "10",
-                                "format": 500
-                            }
-                        }
-                    },
-                    "45550": {
-                        "727": {
-                            "UKRCH": {
-                                "hall": "1",
-                                "format": 497
-                            }
-                        }
-                    },
-                    "45303": {
-                        "727": {
-                            "UKRCH": {
-                                "hall": "3",
-                                "format": 497
-                            }
-                        }
-                    }
-                },
-                "2017-07-15 14:00:00": {
-                    "45762": {
-                        "727": {
-                            "UBVAL": {
-                                "hall": "4",
-                                "format": 497
-                            }
-                        },
-                        "728": {
-                            "UBVAL": {
-                                "hall": "3",
-                                "format": 500
-                            }
-                        }
-                    },
-                    "45912": {
-                        "730_393-313": {
-                            "UCUTO": {
-                                "hall": "4",
-                                "format": 497
-                            }
-                        }
-                    },
-                    "45761": {
-                        "727": {
-                            "CSCDI": {
-                                "hall": "1",
-                                "format": 497
-                            },
-                            "CSTAR": {
-                                "hall": "1",
-                                "format": 497
-                            },
-                            "CSURA": {
-                                "hall": "1",
-                                "format": 500
-                            },
-                            "UBVAL": {
-                                "hall": "1",
-                                "format": 500
-                            }
-                        }
-                    },
-                    "45317": {
-                        "727": {
-                            "CSCDI": {
-                                "hall": "3",
-                                "format": 497
-                            }
-                        }
-                    },
-                    "45320": {
-                        "727": {
-                            "CMAAC": {
-                                "hall": "1",
-                                "format": 497
-                            }
-                        }
-                    },
-                    "45410": {
-                        "727": {
-                            "CSTAR": {
-                                "hall": "2",
-                                "format": 497
-                            }
-                        }
-                    }
-                }
-            }
+            screeningsRaw: screenings
         };
     },
 
     methods: {
         updateTheatres: function updateTheatres(displayTheatres) {
-            console.log(displayTheatres);
             this.displayTheatres = displayTheatres;
         },
         updateLanguages: function updateLanguages(displayLanguages) {
-            console.log(displayLanguages);
             this.displayLanguages = displayLanguages;
         }
     },

@@ -5,34 +5,37 @@ namespace App\Http\Controllers;
 use App\Theatre;
 use App\Language;
 use App\Format;
-use App\Movie;
 use App\Country;
 use Illuminate\Support\Facades\Redis;
+use JavaScript;
 
 class MoviesController extends Controller
 {
     public function index()
     {
-        $theatre    = Theatre::pluck('theatre', 'id');
-        $language   = Language::pluck('language', 'id');
-        $format     = Format::pluck('format', 'id');
-        $country    = Country::pluck('country', 'id');
-        $movie      = json_decode(Redis::get('morroni:movies:movies'), true);
+        $theatres   = Theatre::pluck('theatre', 'id');
+        $languages  = Language::pluck('language', 'id');
+        $formats    = Format::pluck('format', 'id');
+        $countries  = Country::pluck('country', 'id');
+        $movies     = json_decode(Redis::get('morroni:movies:movies'), true);
         $screenings = json_decode(Redis::get('morroni:movies:screenings'), true);
 
-        $movie      = $movie ? $movie : [];
+        $movies     = $movies ? $movies : [];
         $screenings = $screenings ? $screenings : [];
 
-        return view(
-            'screenings',
+        JavaScript::put(
             compact(
-                'theatre',
-                'language',
-                'format',
-                'country',
-                'movie',
+                'theatres',
+                'languages',
+                'formats',
+                'countries',
+                'movies',
                 'screenings'
             )
+        );
+
+        return view(
+            'screenings'
         );
     }
 }
