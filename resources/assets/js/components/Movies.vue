@@ -1,12 +1,14 @@
 <template>
-    <div class="MoviesContainer">
-        <div class="col-sm-3">
+    <div class="MoviesContainer row">
+        <div class="col-sm-3 sideBar">
             <theatre-select
                 :displayTheatres="displayTheatres"
-                v-on:updateTheatres="updateTheatres"></theatre-select>
+                v-on:updateTheatres="updateTheatres">
+            </theatre-select>
             <language-select
                 :displayLanguages="displayLanguages"
-                v-on:updateLanguages="updateLanguages"></language-select>
+                v-on:updateLanguages="updateLanguages">
+            </language-select>
         </div>
         <div class="col-sm-9">
             <screening
@@ -17,6 +19,49 @@
         </div>
     </div>
 </template>
+
+<style>
+    input[type="checkbox"] {
+        display: none;
+        opacity: 0.5;
+        box-sizing: border-box;
+        padding: 0;
+    }
+    label {
+        display: block;
+        position: relative;
+        padding: .5em 2.5em;
+        line-height: 1.1;
+        border: 1px solid #DDD;
+        color: RGBa(0,0,0,0.5);
+        cursor: pointer;
+        border-radius: 3px;
+        transition: all 250ms ease-in-out;
+    }
+    label:hover {
+        background: #FFF;
+        border-color: #CCC;
+    }
+    label:before {
+        content: " ";
+        position: absolute;
+        top: .5em;
+        left: .7em;
+        width: 1em;
+        height: 1em;
+        background: #FFF;
+        border: 1px solid #DDD;
+        border-radius: 100%;
+    }
+    input[type="checkbox"]:checked + label {
+        color: #333;
+        background: #FFF;
+    }
+    input[type="checkbox"]:checked + label:before {
+        background: #5CC886;
+        border-color: #5CC886;
+    }
+</style>
 
 <script>
     export default {

@@ -13,10 +13,8 @@
 
 <body class="@yield('bodyClass')">
 
-    <div class="container-fluid">
-        <div class="row" id="app">
-            @yield('content')
-        </div>
+    <div class="container-fluid" id="app">
+        @yield('content')
     </div>
 
     @include('footer')

@@ -3,6 +3,7 @@
         <div v-for="(languages, idLanguage) in languages">
             <input
                 type="checkbox"
+                :id="idLanguage"
                 :value="idLanguage"
                 v-model="checked"
                 @change="updateLanguages">
@@ -10,6 +11,13 @@
         </div>
     </div>
 </template>
+
+<style scoped>
+    input[type="checkbox"]:checked + label:before {
+        background: #617CE7;
+        border-color: #617CE7;
+    }
+</style>
 
 <script>
     export default {

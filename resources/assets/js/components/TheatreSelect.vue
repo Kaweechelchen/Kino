@@ -3,13 +3,21 @@
         <div v-for="(name, idTheatre) in theatres">
             <input
                 type="checkbox"
+                :id="idTheatre"
                 :value="idTheatre"
                 v-model="checked"
                 @change="updateTheatres">
-            <label :for="idTheatre">{{ name }}</label>
+            <label
+                :for="idTheatre">
+                {{ name }}
+            </label>
         </div>
     </div>
 </template>
+
+<style>
+
+</style>
 
 <script>
     export default {
