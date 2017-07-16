@@ -1,10 +1,10 @@
 <template>
     <div class="MovieContainer">
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-xs-2">
                 <img :src="poster(movie)">
             </div>
-            <div class="col-sm-10 metaData">
+            <div class="col-xs-10 metaData">
                 <theatre
                     v-for="(versions, theatre) in theatres"
                     :theatre="theatre"
