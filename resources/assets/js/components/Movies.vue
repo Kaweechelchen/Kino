@@ -59,10 +59,6 @@
         padding-top: 6em
 
     .screenings
-        position: fixed
-        overflow-y: scroll
-        left: 0
-        top: 0
         height: 100vh
 
     footer
