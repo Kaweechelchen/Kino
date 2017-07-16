@@ -1,16 +1,25 @@
 <template>
     <div class="MoviesContainer row">
-        <div class="col-sm-3 sideBar">
+        <div class="col-sm-3 col-lg-2 sideBar">
+            <h1 class="border-bottom">Movies 🍿</h1>
             <theatre-select
                 :displayTheatres="displayTheatres"
+                class="border-bottom"
                 v-on:updateTheatres="updateTheatres">
             </theatre-select>
             <language-select
                 :displayLanguages="displayLanguages"
+                class="border-bottom"
                 v-on:updateLanguages="updateLanguages">
             </language-select>
+            <footer class="center hidden-xs">
+                <a href="https://github.com/kaweechelchen/kino" target="_blank"><i title="coded" class="fa fa-code" aria-hidden="true"></i></a> with <i title="love" class="fa fa-heart red pulse" aria-hidden="true"></i> by <a href="https://twitter.com/FAQ">Tezza</a>
+                <br />Logo made by <a href="http://www.flaticon.com/authors/dimi-kazak" target="_blank" title="Dimi Kazak">Dimi Kazak</a> from <a href="http://www.flaticon.com" target="_blank" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+                <br />Glasses icon created by Fabio Grande from the Noun Project
+                <br />Data scraped from Kinepolis
+            </footer>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-9 col-lg-10">
             <screening
                 v-for="(movies, screening) in screenings"
                 :screening="screening"
@@ -20,43 +29,34 @@
     </div>
 </template>
 
-<style>
-    input[type="checkbox"] {
-        display: none;
-        opacity: 0.5;
-        box-sizing: border-box;
-        padding: 0;
-    }
-    label {
-        display: block;
-        position: relative;
-        padding: .5em 2.5em;
-        line-height: 1.1;
-        border: 1px solid #DDD;
-        color: RGBa(0,0,0,0.5);
-        cursor: pointer;
-        border-radius: 3px;
-        transition: all 250ms ease-in-out;
-    }
-    label:before {
-        content: " ";
-        position: absolute;
-        top: .5em;
-        left: .7em;
-        width: 1em;
-        height: 1em;
-        background: #FFF;
-        border: 1px solid #DDD;
-        border-radius: 100%;
-    }
-    input[type="checkbox"]:checked + label {
-        color: #333;
-        background: #FFF;
-    }
-    input[type="checkbox"]:checked + label:before {
-        background: #5CC886;
-        border-color: #5CC886;
-    }
+<style lang="sass">
+    input[type=checkbox]
+        display: none
+        box-sizing: border-box
+        padding: 0
+
+    label
+        padding: 0.2em 0
+        line-height: 1.1
+        color: rgba(#636b6f,0.4)
+        cursor: pointer
+        transition: all 250ms ease-in-out
+
+    input[type=checkbox]:checked + label
+        color: #636b6f
+
+    .sideBar
+        border-right: 1px solid #eee
+        height: 100%
+
+    footer
+        font-size: 0.7em
+
+    .border-bottom
+        padding-bottom: 0.5em
+        margin: 0.5em 0
+        border-bottom: 1px solid #eee
+
 </style>
 
 <script>
