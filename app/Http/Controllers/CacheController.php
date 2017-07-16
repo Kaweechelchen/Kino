@@ -31,7 +31,7 @@ class CacheController extends Controller
         foreach ($screeningsRaw as &$screeningRaw) {
             $screening = [];
             foreach ($screeningRaw['movies'] as $key => $movie) {
-                $screening[$movie->id][$movie->pivot->language_id][$movie->pivot->theatre_id] = [
+                $screening[$movie->id][$movie->pivot->theatre_id][$movie->pivot->language_id] = [
                     'hall'   => $movie->pivot->hall,
                     'format' => $movie->pivot->format_id,
                 ];

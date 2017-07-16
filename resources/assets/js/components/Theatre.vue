@@ -1,23 +1,20 @@
 <template>
     <div class="TheatreContainer">
         {{ theatres[theatre] }}
-        <img src="/../img/3dglasses.svg" v-if="theatreMeta.format == '500'">
-        <span class="badge badge-default">{{theatreMeta.hall}}</span>
+        <version
+            v-for="(theatreMeta, version) in versions"
+            :version="version"
+            :theatreMeta="theatreMeta">
+        </version>
     </div>
 </template>
-
-<style scoped>
-    img {
-        width: 1.8em;
-    }
-</style>
 
 <script>
     export default {
         name: 'Theatre',
         props: [
             'theatre',
-            'theatreMeta'
+            'versions'
         ],
         computed: {
             theatres() {

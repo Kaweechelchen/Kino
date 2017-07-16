@@ -4,12 +4,12 @@
             <div class="col-sm-2">
                 <img :src="poster(movie)">
             </div>
-            <div class="col-sm-10">
-                <version
-                    v-for="(theatres, version) in versions"
-                    :version="version"
-                    :theatres="theatres">
-                </version>
+            <div class="col-sm-10 metaData">
+                <theatre
+                    v-for="(versions, theatre) in theatres"
+                    :theatre="theatre"
+                    :versions="versions">
+                </theatre>
             </div>
         </div>
     </div>
@@ -19,7 +19,9 @@
     .MovieContainer {
         background-color: #fff;
         margin: 0.3rem;
-        padding: 0.75em;
+    }
+    .metaData {
+        padding: 0.7em;
     }
     img {
         max-height: 100px;
@@ -31,13 +33,8 @@
         name: 'Movie',
         props: [
             'movie',
-            'versions'
+            'theatres'
         ],
-        computed: {
-            movies() {
-                return window.movies
-            }
-        },
         methods: {
             poster(movieId) {
                 return '/../storage/posters/'+movieId+'.jpg'

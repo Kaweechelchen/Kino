@@ -2,9 +2,9 @@
     <div class="ScreeningContainer">
         {{ screening | displayScreeningTime }}
         <movie
-            v-for="(versions, movie) in movies"
+            v-for="(theatres, movie) in movies"
             :movie="movie"
-            :versions="versions">
+            :theatres="theatres">
         </movie>
     </div>
 </template>
@@ -21,7 +21,7 @@
                 if (moment().diff(moment(date), 'days') == 0) {
                     return moment(date).format('HH:mm');
                 }
-                return moment(date).format('D.MM, HH:mm');
+                return moment(date).format('dddd, D.MM, HH:mm');
             }
         },
     }

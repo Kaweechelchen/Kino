@@ -1698,15 +1698,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'Movie',
-    props: ['movie', 'versions'],
-    computed: {
-        movies: function movies() {
-            return window.movies;
-        }
-    },
+    props: ['movie', 'theatres'],
     methods: {
         poster: function poster(movieId) {
             return '/../storage/posters/' + movieId + '.jpg';
@@ -1769,16 +1766,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var screenings = {};
             for (var screening in this.screeningsRaw) {
                 for (var movie in this.screeningsRaw[screening]) {
-                    for (var language in this.screeningsRaw[screening][movie]) {
-                        if (this.displayLanguages.indexOf(language) == -1) {
+                    for (var theatre in this.screeningsRaw[screening][movie]) {
+                        if (this.displayTheatres.indexOf(theatre) == -1) {
                             continue;
                         }
-                        for (var theatre in this.screeningsRaw[screening][movie][language]) {
-                            if (this.displayTheatres.indexOf(theatre) == -1) {
+                        for (var language in this.screeningsRaw[screening][movie][theatre]) {
+                            if (this.displayLanguages.indexOf(language) == -1) {
                                 continue;
                             }
 
-                            if (this.displayFormats.indexOf(String(this.screeningsRaw[screening][movie][language][theatre]['format'])) == -1) {
+                            if (this.displayFormats.indexOf(String(this.screeningsRaw[screening][movie][theatre][language]['format'])) == -1) {
                                 continue;
                             }
                             if (!screenings[screening]) {
@@ -1787,13 +1784,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             if (!screenings[screening][movie]) {
                                 screenings[screening][movie] = {};
                             }
-                            if (!screenings[screening][movie][language]) {
-                                screenings[screening][movie][language] = {};
+                            if (!screenings[screening][movie][theatre]) {
+                                screenings[screening][movie][theatre] = {};
                             }
-                            if (!screenings[screening][movie][language][theatre]) {
-                                screenings[screening][movie][language][theatre] = {};
+                            if (!screenings[screening][movie][theatre][language]) {
+                                screenings[screening][movie][theatre][language] = {};
                             }
-                            screenings[screening][movie][language][theatre] = this.screeningsRaw[screening][movie][language][theatre];
+                            screenings[screening][movie][theatre][language] = this.screeningsRaw[screening][movie][theatre][language];
                         }
                     }
                 }
@@ -1834,7 +1831,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (moment().diff(moment(date), 'days') == 0) {
                 return moment(date).format('HH:mm');
             }
-            return moment(date).format('D.MM, HH:mm');
+            return moment(date).format('dddd, D.MM, HH:mm');
         }
     }
 });
@@ -1857,13 +1854,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'Theatre',
-    props: ['theatre', 'theatreMeta'],
+    props: ['theatre', 'versions'],
     computed: {
         theatres: function theatres() {
             return window.theatres;
@@ -1939,10 +1933,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'Version',
-    props: ['version', 'theatres'],
+    props: ['version', 'theatreMeta'],
     computed: {
         languages: function languages() {
             return window.languages;
@@ -4336,7 +4336,7 @@ if (typeof jQuery === 'undefined') {
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-33ce8158\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Theatre.vue":
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-845f4bd6\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Version.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(undefined);
@@ -4344,7 +4344,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\nimg[data-v-33ce8158] {\n    width: 1.8em;\n}\n", ""]);
+exports.push([module.i, "\n.LanguageContainer[data-v-845f4bd6] {\n    margin-left: 1em;\n}\nimg[data-v-845f4bd6] {\n    width: 1.8em;\n}\n", ""]);
 
 // exports
 
@@ -4359,7 +4359,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.MovieContainer[data-v-86c414a6] {\n    background-color: #fff;\n    margin: 0.3rem;\n    padding: 0.75em;\n}\nimg[data-v-86c414a6] {\n    max-height: 100px;\n}\n", ""]);
+exports.push([module.i, "\n.MovieContainer[data-v-86c414a6] {\n    background-color: #fff;\n    margin: 0.3rem;\n}\n.metaData[data-v-86c414a6] {\n    padding: 0.7em;\n}\nimg[data-v-86c414a6] {\n    max-height: 100px;\n}\n", ""]);
 
 // exports
 
@@ -48045,11 +48045,11 @@ module.exports = function normalizeComponent (
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "ScreeningContainer"
-  }, [_vm._v("\n    " + _vm._s(_vm._f("displayScreeningTime")(_vm.screening)) + "\n    "), _vm._l((_vm.movies), function(versions, movie) {
+  }, [_vm._v("\n    " + _vm._s(_vm._f("displayScreeningTime")(_vm.screening)) + "\n    "), _vm._l((_vm.movies), function(theatres, movie) {
     return _c('movie', {
       attrs: {
         "movie": movie,
-        "versions": versions
+        "theatres": theatres
       }
     })
   })], 2)
@@ -48121,19 +48121,20 @@ if (false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-33ce8158\",\"hasScoped\":true}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Theatre.vue":
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-33ce8158\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Theatre.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "TheatreContainer"
-  }, [_vm._v("\n    " + _vm._s(_vm.theatres[_vm.theatre]) + "\n    "), (_vm.theatreMeta.format == '500') ? _c('img', {
-    attrs: {
-      "src": "/../img/3dglasses.svg"
-    }
-  }) : _vm._e(), _vm._v(" "), _c('span', {
-    staticClass: "badge badge-default"
-  }, [_vm._v(_vm._s(_vm.theatreMeta.hall))])])
+  }, [_vm._v("\n    " + _vm._s(_vm.theatres[_vm.theatre]) + "\n    "), _vm._l((_vm.versions), function(theatreMeta, version) {
+    return _c('version', {
+      attrs: {
+        "version": version,
+        "theatreMeta": theatreMeta
+      }
+    })
+  })], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -48188,20 +48189,19 @@ if (false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-845f4bd6\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Version.vue":
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-845f4bd6\",\"hasScoped\":true}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Version.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "LanguageContainer"
-  }, [_vm._v("\n    " + _vm._s(_vm.languages[_vm.version]) + "\n    "), _vm._l((_vm.theatres), function(theatreMeta, theatre) {
-    return _c('theatre', {
-      attrs: {
-        "theatre": theatre,
-        "theatreMeta": theatreMeta
-      }
-    })
-  })], 2)
+  }, [_vm._v("\n    " + _vm._s(_vm.languages[_vm.version]) + "\n    "), (_vm.theatreMeta.format == '500') ? _c('img', {
+    attrs: {
+      "src": "/../img/3dglasses.svg"
+    }
+  }) : _vm._e(), _vm._v(" "), _c('span', {
+    staticClass: "badge badge-default"
+  }, [_vm._v(_vm._s(_vm.theatreMeta.hall))])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -48228,12 +48228,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "src": _vm.poster(_vm.movie)
     }
   })]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-10"
-  }, _vm._l((_vm.versions), function(theatres, version) {
-    return _c('version', {
+    staticClass: "col-sm-10 metaData"
+  }, _vm._l((_vm.theatres), function(versions, theatre) {
+    return _c('theatre', {
       attrs: {
-        "version": version,
-        "theatres": theatres
+        "theatre": theatre,
+        "versions": versions
       }
     })
   }))])])
@@ -48305,23 +48305,23 @@ if (false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-33ce8158\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Theatre.vue":
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-845f4bd6\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Version.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-33ce8158\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Theatre.vue");
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-845f4bd6\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Version.vue");
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("3b6b6c3e", content, false);
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("48b7348e", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-33ce8158\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Theatre.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-33ce8158\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Theatre.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-845f4bd6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Version.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-845f4bd6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Version.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -59013,19 +59013,15 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-33ce8158\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Theatre.vue")
-}
 var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
   /* script */
   __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/Theatre.vue"),
   /* template */
-  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-33ce8158\",\"hasScoped\":true}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Theatre.vue"),
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-33ce8158\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Theatre.vue"),
   /* styles */
-  injectStyle,
+  null,
   /* scopeId */
-  "data-v-33ce8158",
+  null,
   /* moduleIdentifier (server only) */
   null
 )
@@ -59099,15 +59095,19 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-845f4bd6\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Version.vue")
+}
 var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
   /* script */
   __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/Version.vue"),
   /* template */
-  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-845f4bd6\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Version.vue"),
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-845f4bd6\",\"hasScoped\":true}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Version.vue"),
   /* styles */
-  null,
+  injectStyle,
   /* scopeId */
-  null,
+  "data-v-845f4bd6",
   /* moduleIdentifier (server only) */
   null
 )

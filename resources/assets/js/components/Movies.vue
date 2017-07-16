@@ -60,16 +60,16 @@
                 var screenings = {};
                 for (var screening in this.screeningsRaw) {
                     for (var movie in this.screeningsRaw[screening]) {
-                        for (var language in this.screeningsRaw[screening][movie]) {
-                            if (this.displayLanguages.indexOf(language) == -1) {
+                        for (var theatre in this.screeningsRaw[screening][movie]) {
+                            if (this.displayTheatres.indexOf(theatre) == -1) {
                                 continue;
                             }
-                            for (var theatre in this.screeningsRaw[screening][movie][language]) {
-                                if (this.displayTheatres.indexOf(theatre) == -1) {
+                            for (var language in this.screeningsRaw[screening][movie][theatre]) {
+                                if (this.displayLanguages.indexOf(language) == -1) {
                                     continue;
                                 }
 
-                                if (this.displayFormats.indexOf(String(this.screeningsRaw[screening][movie][language][theatre]['format'])) == -1) {
+                                if (this.displayFormats.indexOf(String(this.screeningsRaw[screening][movie][theatre][language]['format'])) == -1) {
                                     continue;
                                 }
                                 if (!screenings[screening]) {
@@ -78,13 +78,13 @@
                                 if (!screenings[screening][movie]) {
                                     screenings[screening][movie] = {}
                                 }
-                                if (!screenings[screening][movie][language]) {
-                                    screenings[screening][movie][language] = {}
+                                if (!screenings[screening][movie][theatre]) {
+                                    screenings[screening][movie][theatre] = {}
                                 }
-                                if (!screenings[screening][movie][language][theatre]) {
-                                    screenings[screening][movie][language][theatre] = {}
+                                if (!screenings[screening][movie][theatre][language]) {
+                                    screenings[screening][movie][theatre][language] = {}
                                 }
-                                screenings[screening][movie][language][theatre] = this.screeningsRaw[screening][movie][language][theatre]
+                                screenings[screening][movie][theatre][language] = this.screeningsRaw[screening][movie][theatre][language]
                             }
 
                         }
