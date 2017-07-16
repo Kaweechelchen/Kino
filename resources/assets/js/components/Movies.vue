@@ -1,21 +1,18 @@
 <template>
     <div class="MoviesContainer">
-        <div class="col-md-3">
+        <div class="col-sm-3">
             <theatre-select
-                :theatres="theatres"
                 :displayTheatres="displayTheatres"
                 v-on:updateTheatres="updateTheatres"></theatre-select>
             <language-select
-                :languages="languages"
                 :displayLanguages="displayLanguages"
                 v-on:updateLanguages="updateLanguages"></language-select>
         </div>
-        <div class="col-md-9">
+        <div class="col-sm-9">
             <screening
                 v-for="(movies, screening) in screenings"
                 :screening="screening"
-                :movies="movies"
-                :languages="languages">
+                :movies="movies">
             </screening>
         </div>
     </div>
@@ -26,13 +23,14 @@
         data () {
             return {
                 theatres: theatres,
+                languages: languages,
+                screeningsRaw: screenings,
                 displayTheatres: [
                     'UCUTO',
                     'CSTAR',
                     'UBVAL',
                     'UKRCH'
                 ],
-                languages: languages,
                 displayLanguages: [
                     '302',
                     '305',
@@ -42,9 +40,9 @@
                     '730'
                 ],
                 displayFormats: [
-                    '497'
-                ],
-                screeningsRaw: screenings
+                    '497',
+                    '500'
+                ]
             }
         },
         methods: {

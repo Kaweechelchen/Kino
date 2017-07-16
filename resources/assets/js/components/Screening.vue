@@ -1,11 +1,10 @@
 <template>
     <div class="ScreeningContainer">
-        {{ screening }}
+        {{ screening | displayScreeningTime }}
         <movie
             v-for="(versions, movie) in movies"
             :movie="movie"
-            :versions="versions"
-            :languages="languages">
+            :versions="versions">
         </movie>
     </div>
 </template>
@@ -15,8 +14,15 @@
         name: 'screening',
         props: [
             'screening',
-            'movies',
-            'languages'
-        ]
+            'movies'
+        ],
+        filters: {
+            displayScreeningTime: function (date) {
+                if (moment().diff(moment(date), 'days') == 0) {
+                    return moment(date).format('HH:mm');
+                }
+                return moment(date).format('D.MM, HH:mm');
+            }
+        },
     }
 </script>

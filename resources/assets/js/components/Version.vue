@@ -1,6 +1,11 @@
 <template>
     <div class="LanguageContainer">
-        {{ version }} :: {{ languages[version] }}
+        {{ languages[version] }}
+        <theatre
+            v-for="(theatreMeta, theatre) in theatres"
+            :theatre="theatre"
+            :theatreMeta="theatreMeta">
+        </theatre>
     </div>
 </template>
 
@@ -9,8 +14,12 @@
         name: 'Version',
         props: [
             'version',
-            'theatres',
-            'languages'
-        ]
+            'theatres'
+        ],
+        computed: {
+            languages() {
+                return window.languages
+            }
+        }
     }
 </script>

@@ -15,7 +15,6 @@
     export default {
         name: 'TheatreSelect',
         props: [
-            'theatres',
             'displayTheatres'
         ],
         methods: {
@@ -24,6 +23,9 @@
             }
         },
         computed: {
+            theatres () {
+                return window.theatres
+            },
             checked: {
                 get() {
                     return this.displayTheatres;

@@ -15,7 +15,6 @@
     export default {
         name: 'LanguageSelect',
         props: [
-            'languages',
             'displayLanguages'
         ],
         methods: {
@@ -24,6 +23,9 @@
             }
         },
         computed: {
+            languages() {
+                return window.languages
+            },
             checked: {
                 get() {
                     return this.displayLanguages;

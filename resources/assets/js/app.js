@@ -21,6 +21,7 @@ Vue.component('screening', require('./components/Screening.vue'));
 Vue.component('movies', require('./components/Movies.vue'));
 Vue.component('movie', require('./components/Movie.vue'));
 Vue.component('version', require('./components/Version.vue'));
+Vue.component('theatre', require('./components/Theatre.vue'));
 
 const app = new Vue({
     el: '#app'
