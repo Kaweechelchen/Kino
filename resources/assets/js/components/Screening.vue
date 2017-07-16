@@ -18,7 +18,7 @@
         ],
         filters: {
             displayScreeningTime: function (date) {
-                if (moment().diff(moment(date), 'days') == 0) {
+                if (moment().isSame(moment(date), 'd')) {
                     return moment(date).format('HH:mm');
                 }
                 return moment(date).format('dddd, D.MM, HH:mm');

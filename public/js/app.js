@@ -327,7 +327,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['screening', 'movies'],
     filters: {
         displayScreeningTime: function displayScreeningTime(date) {
-            if (moment().diff(moment(date), 'days') == 0) {
+            if (moment().isSame(moment(date), 'd')) {
                 return moment(date).format('HH:mm');
             }
             return moment(date).format('dddd, D.MM, HH:mm');
