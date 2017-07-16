@@ -20,8 +20,16 @@ class Kinepolis
     {
         $result = [];
 
-        $result['genres']     = self::getFilterAsArray('genre', $this->html);
-        $result['languages']  = self::getFilterAsArray('version', $this->html);
+        $result['genres']    = self::getFilterAsArray('genre', $this->html);
+        $result['languages'] = self::getFilterAsArray('version', $this->html);
+
+        foreach ($result['languages'] as $languageId => $language) {
+            $language                         = str_replace('Subtitles', 'sub', $language);
+            $language                         = str_replace(' version', '', $language);
+            $language                         = preg_replace('/\s+/', ' ', $language);
+            $result['languages'][$languageId] = $language;
+        }
+
         $result['categories'] = self::getFilterAsArray('category', $this->html);
         $result['formats']    = self::getFilterAsArray('format', $this->html);
         $result['types']      = self::getFilterAsArray('type', $this->html);
