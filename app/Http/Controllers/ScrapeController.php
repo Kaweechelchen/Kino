@@ -22,7 +22,7 @@ class ScrapeController extends Controller
 {
     public function execute()
     {
-        app('Kinepolis')->source('rawData');
+        app('Kinepolis')->source(env('KINEPOLIS_BASE_URL'));
         app('Kinepolis')->load();
         app('Kinepolis')->scrape();
 
