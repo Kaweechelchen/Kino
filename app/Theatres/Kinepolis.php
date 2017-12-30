@@ -50,14 +50,15 @@ class Kinepolis
             $movie = $movie['data'];
 
             $titles = [];
-            //var_dump($movie['variants']);
             foreach ($movie['variants'] as $language => $variant) {
                 $titles[$language] = $variant['title'];
 
-                foreach ($variant['poster'] as $key => $poster) {
-                    $url = str_replace('public://', env('KINEPOLIS_POSTER_LOCATION'), $poster['uri']);
-                    Storage::put('public/posters/'.$movie['uuid'].'.jpg', file_get_contents($url));
-                    break;
+                if ($variant['poster']) {
+                    foreach ($variant['poster'] as $key => $poster) {
+                        $url = str_replace('public://', env('KINEPOLIS_POSTER_LOCATION'), $poster['uri']);
+                        Storage::put('public/posters/'.$movie['uuid'].'.jpg', file_get_contents($url));
+                        break;
+                    }
                 }
             }
 
