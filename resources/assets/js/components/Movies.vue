@@ -29,6 +29,14 @@
                 <br />Data scraped from Kinepolis
             </footer>
         </div>
+        <div class="col-lg-10 offset-lg-2 screenings d-none d-lg-block d-xl-block">
+            <screening
+                v-for="(movies, screening) in screenings"
+                :key="screening"
+                :screening="screening"
+                :movies="movies">
+            </screening>
+        </div>
 
         <!-- phones -->
         <div class="col-12 sideBar d-block d-lg-none d-xl-none"
@@ -51,7 +59,8 @@
                 <br />Data scraped from Kinepolis
             </footer>
         </div>
-        <div class="col-12 col-lg-10 offset-lg-2 screenings">
+        <div class="col-12 screenings d-block d-lg-none d-xl-none"
+            v-if="!showMenu">
             <screening
                 v-for="(movies, screening) in screenings"
                 :key="screening"
@@ -97,11 +106,11 @@
         border-bottom: 1px solid #eee
 
     .title
-        margin: 0 0 0.2em
-        padding: .1em 0 .3em
+        padding: .1em 1em .3em
         border-bottom: 1px solid #eee
         background-color: #fff
         z-index: 10
+        //background-color: rgb(252, 191, 49)
 
     .sideBar
         background-color: white
@@ -124,7 +133,7 @@
 
     @media (min-width: 992px)
         .right
-            display: hidden
+            display: none
 
 </style>
 
