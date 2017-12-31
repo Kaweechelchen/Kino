@@ -11,7 +11,6 @@
 
         <!-- tablets & up -->
         <div class="col-lg-2 sideBar d-none d-lg-block d-xl-block">
-            LARGE
             <theatre-select
                 :displayTheatres="displayTheatres"
                 class="border-bottom"
@@ -41,7 +40,6 @@
         <!-- phones -->
         <div class="col-12 sideBar d-block d-lg-none d-xl-none"
             v-if="showMenu">
-            SMALL
             <theatre-select
                 :displayTheatres="displayTheatres"
                 class="border-bottom"
