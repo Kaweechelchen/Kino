@@ -2,7 +2,7 @@
     <div class="LanguageContainer">
         {{ languages[version] }}
         <img src="/../img/3dglasses.svg" v-if="theatreMeta.format == '500'">
-        <span class="badge badge-default">{{theatreMeta.hall}}</span>
+        <span class="badge badge-pill badge-secondary">{{theatreMeta.hall}}</span>
     </div>
 </template>
 

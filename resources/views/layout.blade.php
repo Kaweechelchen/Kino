@@ -12,7 +12,7 @@
     <meta property="og:image" content="{{ env('APP_URL') }}/img/logo.svg" />
     <link rel="shortcut icon" href="{{ env('APP_URL') }}/img/logo.svg" />
     <title>Movies 🍿</title>
-    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
 </head>
 
 <body class="@yield('bodyClass')">
@@ -20,7 +20,7 @@
         @yield('content')
     </div>
     @include('footer')
-    <script src="{{ mix('/js/app.js') }}"></script>
+    <script src="/js/app.js"></script>
 </body>
 
 </html>

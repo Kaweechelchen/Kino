@@ -1,17 +1,22 @@
 <template>
     <div class="MoviesContainer row">
-        <div class="col-sm-3 col-lg-2 sideBar">
-            <h1 class="title">Movies 🍿</h1>
+        <div class="col-12 title">
+            <span class="left">
+                <h1>Movies <img src="/img/logo.svg" style="width:1em" /></h1>
+            </span>
+            <span class="right" v-on:click="toggleMenu">
+                <i class="fa fa-bars" aria-hidden="true" ></i>
+            </span>
+        </div>
+
+        <!-- tablets & up -->
+        <div class="col-lg-2 sideBar d-none d-lg-block d-xl-block">
+            LARGE
             <theatre-select
                 :displayTheatres="displayTheatres"
                 class="border-bottom"
                 v-on:updateTheatres="updateTheatres">
             </theatre-select>
-            <language-select
-                :displayLanguages="displayLanguages"
-                class="border-bottom"
-                v-on:updateLanguages="updateLanguages">
-            </language-select>
             <format-select
                 :displayFormats="displayFormats"
                 class="border-bottom"
@@ -24,7 +29,29 @@
                 <br />Data scraped from Kinepolis
             </footer>
         </div>
-        <div class="col-sm-9 col-lg-10 col-sm-offset-3 col-lg-offset-2 screenings">
+
+        <!-- phones -->
+        <div class="col-12 sideBar d-block d-lg-none d-xl-none"
+            v-if="showMenu">
+            SMALL
+            <theatre-select
+                :displayTheatres="displayTheatres"
+                class="border-bottom"
+                v-on:updateTheatres="updateTheatres">
+            </theatre-select>
+            <format-select
+                :displayFormats="displayFormats"
+                class="border-bottom"
+                v-on:updateFormats="updateFormats">
+            </format-select>
+            <footer class="center hidden-xs">
+                <a href="https://github.com/kaweechelchen/kino" target="_blank"><i title="coded" class="fa fa-code" aria-hidden="true"></i></a> with <i title="love" class="fa fa-heart red pulse" aria-hidden="true"></i> by <a href="https://twitter.com/FAQ">Tezza</a>
+                <br />Logo made by <a href="http://www.flaticon.com/authors/dimi-kazak" target="_blank" title="Dimi Kazak">Dimi Kazak</a> from <a href="http://www.flaticon.com" target="_blank" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+                <br />Glasses icon created by Fabio Grande from the Noun Project
+                <br />Data scraped from Kinepolis
+            </footer>
+        </div>
+        <div class="col-12 col-lg-10 offset-lg-2 screenings">
             <screening
                 v-for="(movies, screening) in screenings"
                 :key="screening"
@@ -70,12 +97,34 @@
         border-bottom: 1px solid #eee
 
     .title
-        margin: 0 0 0.5em 0
-        padding: 0.5em 0
+        margin: 0 0 0.2em
+        padding: .1em 0 .3em
         border-bottom: 1px solid #eee
-        position: fixed
-        top: 0
         background-color: #fff
+        z-index: 10
+
+    .sideBar
+        background-color: white
+
+    .left
+        float: left
+
+    .right
+        font-size: 2.5rem
+        float: right
+
+    @media (max-width: 991px)
+        .title
+            position: fixed
+        .sideBar
+            position: relative
+            padding-top: 5em
+        .screenings
+            padding-top: 5em
+
+    @media (min-width: 992px)
+        .right
+            display: hidden
 
 </style>
 
@@ -84,7 +133,6 @@
         data () {
             return {
                 theatres: theatres,
-                languages: languages,
                 screeningsRaw: screenings,
                 displayTheatres: [
                     'UCUTO',
@@ -92,17 +140,10 @@
                     'UBVAL',
                     'UKRCH'
                 ],
-                displayLanguages: [
-                    '302',
-                    '305',
-                    '313',
-                    '727',
-                    '728',
-                    '730'
-                ],
                 displayFormats: [
                     '497'
-                ]
+                ],
+                showMenu: false
             }
         },
         methods: {
@@ -110,13 +151,14 @@
                 localStorage.setItem('displayTheatres', JSON.stringify(displayTheatres))
                 this.displayTheatres = displayTheatres
             },
-            updateLanguages: function(displayLanguages) {
-                localStorage.setItem('displayLanguages', JSON.stringify(displayLanguages))
-                this.displayLanguages = displayLanguages
-            },
             updateFormats: function(displayFormats) {
                 localStorage.setItem('displayFormats', JSON.stringify(displayFormats))
                 this.displayFormats = displayFormats
+            },
+            toggleMenu: function(event) {
+                console.log('blubb')
+                this.showMenu = !this.showMenu
+                console.log(this.showMenu)
             }
         },
         computed: {
@@ -129,10 +171,6 @@
                                 continue;
                             }
                             for (var language in this.screeningsRaw[screening][movie][theatre]) {
-                                if (this.displayLanguages.indexOf(language) == -1) {
-                                    continue;
-                                }
-
                                 if (this.displayFormats.indexOf(String(this.screeningsRaw[screening][movie][theatre][language]['format'])) == -1) {
                                     continue;
                                 }
@@ -145,9 +183,6 @@
                                 if (!screenings[screening][movie][theatre]) {
                                     screenings[screening][movie][theatre] = {}
                                 }
-                                if (!screenings[screening][movie][theatre][language]) {
-                                    screenings[screening][movie][theatre][language] = {}
-                                }
                                 screenings[screening][movie][theatre][language] = this.screeningsRaw[screening][movie][theatre][language]
                             }
 
@@ -159,8 +194,6 @@
             }
         },
         mounted: function () {
-            if (localStorage.getItem('displayLanguages'))
-                this.displayLanguages = JSON.parse(localStorage.getItem('displayLanguages'))
             if (localStorage.getItem('displayTheatres'))
                 this.displayTheatres = JSON.parse(localStorage.getItem('displayTheatres'))
             if (localStorage.getItem('displayFormats'))
